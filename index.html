@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>ESE 123 Lab Guides</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column, each lab section = explanation + a live instrument panel (scope screens stay dark like the real DSO-X) */
+:root{
+  --bg:#eceff3; --panel:#ffffff; --ink:#17212b; --muted:#56636f; --line:#d2d8df;
+  --accent:#1d5bb8; --accent-soft:#dfe8f7; --warn:#b4480f; --warn-soft:#fbe9df; --ok:#17803d;
+  --ch1:#a87b00; --ch2:#11804a;
+  --scr:#0a1017; --grid:#26323f; --grid2:#3a4858; --c1s:#f3d417; --c2s:#3ddc6f; --curs:#e8eef5; --hl:rgba(120,180,255,.20); --part:rgba(255,140,60,.22);
+  --f-display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1319; --panel:#151c24; --ink:#e4e9ee; --muted:#97a3af; --line:#2a343f;
+  --accent:#74a9ff; --accent-soft:#1b2a40; --warn:#ff9a62; --warn-soft:#3a2216; --ok:#4fd27f;
+  --ch1:#f2cf4a; --ch2:#4fdc86; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1319; --panel:#151c24; --ink:#e4e9ee; --muted:#97a3af; --line:#2a343f;
+  --accent:#74a9ff; --accent-soft:#1b2a40; --warn:#ff9a62; --warn-soft:#3a2216; --ok:#4fd27f;
+  --ch1:#f2cf4a; --ch2:#4fdc86; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:920px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.12;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:700}
+h3{font-size:1.25rem;font-weight:600}
+p{margin:0;max-width:68ch}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+header.hero{padding-block:40px 24px;display:grid;gap:14px}
+.hero .lede{font-size:1.1rem;color:var(--muted)}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+nav.toc a{font-family:var(--f-mono);font-size:.8rem;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);padding:6px 10px;border-radius:6px}
+nav.toc a:hover,nav.toc a:focus-visible{border-color:var(--accent);color:var(--accent)}
+section.lab{padding-block:40px 8px;border-top:1px solid var(--line);display:grid;gap:18px}
+.steps-tag{font-family:var(--f-mono);font-size:.78rem;color:var(--accent)}
+.stack{display:grid;gap:12px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:12px;min-width:0}
+.two{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+canvas.scope{width:100%;aspect-ratio:10/8;display:block;border-radius:6px;background:var(--scr)}
+canvas.plot{width:100%;aspect-ratio:16/9;display:block}
+canvas.wide{width:100%;aspect-ratio:3/1;display:block;border-radius:6px;background:var(--scr)}
+.bezel{background:#1c232c;border-radius:10px;padding:10px;display:grid;gap:8px}
+.bezel .strip{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--f-mono);font-size:.78rem;color:#c9d3dd}
+.strip .c1{color:#f3d417}.strip .c2{color:#3ddc6f}
+.ctrls{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.ctrls label{display:grid;gap:4px;font-size:.8rem;color:var(--muted);font-family:var(--f-mono)}
+select,input[type=number]{font:inherit;font-family:var(--f-mono);font-size:.9rem;padding:6px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+button{font:inherit;font-size:.88rem;font-family:var(--f-mono);padding:7px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.on{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+button.key{background:#2b3440;color:#e7edf3;border-color:#3d4855}
+button.key.auto{background:#3b6fd1;border-color:#3b6fd1}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.readout{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-family:var(--f-mono);font-size:.88rem;font-variant-numeric:tabular-nums}
+.readout dt{color:var(--muted)}.readout dd{margin:0}
+.readout .hot{color:var(--accent);font-weight:600}
+.msg{font-size:.9rem;padding:10px 12px;border-radius:8px;background:var(--accent-soft)}
+.msg.warn{background:var(--warn-soft);color:var(--ink);border-left:3px solid var(--warn)}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.why .panel h3{font-size:1.08rem}
+.why .panel p{font-size:.95rem}
+.formula{font-family:var(--f-mono);font-size:1.15rem;padding:10px 14px;background:var(--bg);border-radius:8px;border:1px dashed var(--line);overflow-x:auto}
+.tblwrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+tr.cur td{background:var(--accent-soft)}
+.freqs{display:flex;flex-wrap:wrap;gap:6px}
+.freqs button{padding:5px 9px;font-size:.8rem}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.sw{display:inline-block;width:12px;height:3px;vertical-align:middle;margin-right:6px;border-radius:2px}
+svg text{font-family:var(--f-mono)}
+.schem .wire{stroke:var(--ink);stroke-width:2;fill:none}
+.schem .lbl{fill:var(--ink);font-size:11px}
+.schem .sub{fill:var(--muted);font-size:10px}
+.schem .p1{fill:var(--ch1);font-size:11px;font-weight:600}
+.schem .p2{fill:var(--ch2);font-size:11px;font-weight:600}
+.parts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.part{display:grid;gap:4px;justify-items:start;text-align:left;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);font-family:var(--f-body);font-size:.85rem}
+.part.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.part b{font-family:var(--f-mono);font-size:.8rem}
+.part svg{width:100%;height:40px}
+.detail{display:grid;gap:8px}
+ol.flow{margin:0;padding-left:1.3em;display:grid;gap:6px;max-width:68ch}
+.small{font-size:.86rem;color:var(--muted)}
+.pill{display:inline-block;font-family:var(--f-mono);font-size:.75rem;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+.labnav{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.labnav a{color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:3px 10px;background:var(--panel)}
+.labnav a[aria-current]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.fcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:8px;align-content:start;min-width:0}
+.fcard h3{font-size:1.05rem}
+.fcard .eq{font-family:var(--f-mono);font-size:1.12rem;padding:8px 10px;background:var(--bg);border-radius:6px;overflow-x:auto;white-space:pre}
+.fcard .when{font-size:.92rem}
+.fcard .vars{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:.85rem;margin:0}
+.fcard .vars dt{font-family:var(--f-mono);color:var(--accent)}
+.fcard .vars dd{margin:0;color:var(--muted)}
+.fcard .ex{font-size:.86rem;border-top:1px dashed var(--line);padding-top:8px}
+.fcard .ex b{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-right:6px}
+.stepper{display:flex;flex-wrap:wrap;gap:6px}
+.stepper button{padding:5px 10px;font-size:.8rem}
+.qlist{margin:0;padding-left:1.3em;display:grid;gap:8px;max-width:72ch}
+.qlist li span{color:var(--muted);font-size:.9rem;display:block}
+.psu{background:#1c232c;border-radius:10px;padding:12px;display:grid;gap:8px;color:#d9e2ea;font-family:var(--f-mono)}
+.psu .lcd{background:#0d1a24;border-radius:6px;padding:10px 12px;display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:baseline}
+.psu .big{font-size:1.7rem;color:#5ee08a;font-variant-numeric:tabular-nums}
+.psu .st{font-size:.8rem;padding:2px 8px;border-radius:4px;background:#26323f}
+.psu .st.cc{background:#c2410c;color:#fff}.psu .st.cv{background:#17803d;color:#fff}.psu .st.off{background:#3a4552;color:#aab}
+.plist{display:grid;gap:10px;margin:0;padding:0;list-style:none;counter-reset:pq}
+.plist li{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:grid;gap:8px;counter-increment:pq}
+.plist .q::before{content:"Q" counter(pq) ". ";font-family:var(--f-mono);color:var(--accent);font-weight:600}
+.plist details summary{cursor:pointer;font-family:var(--f-mono);font-size:.85rem;color:var(--accent)}
+.plist details[open] summary{margin-bottom:6px}
+.plist .ans{font-weight:700}
+.plist .work{font-size:.92rem;color:var(--muted)}
+
+.labgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:14px}
+.labcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:10px;align-content:start;min-width:0;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+.labcard:hover,.labcard:focus-visible{border-color:var(--accent);transform:translateY(-2px)}
+.labcard .num{font-family:var(--f-display);font-size:2.6rem;font-weight:700;line-height:1;color:var(--accent)}
+.labcard h3{font-size:1.25rem}
+.labcard p{font-size:.92rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--f-mono);font-size:.72rem;padding:2px 8px;border-radius:99px;background:var(--bg);border:1px solid var(--line)}
+.chip.k{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+.meta{display:flex;gap:14px;font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.links{display:flex;gap:10px;flex-wrap:wrap;font-size:.85rem}
+.links a{color:var(--accent)}
+.use{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
+.use .panel h3{font-size:1.05rem}
+@media (prefers-reduced-motion: reduce){.labcard{transition:none}.labcard:hover{transform:none}}
+</style>
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">Stony Brook University · ESE 123 · Fall 2026</div>
+  <h1>ESE 123 Lab Guides</h1>
+  <p class="lede">Interactive, animated walkthroughs of every ESE 123 lab, written by a TA for students who are new to electrical engineering. Each guide explains what you do, why it matters and how to do it step by step, with live simulations of the instruments, a formula sheet, practice questions and a report guide.</p>
+  <div class="meta" style="font-size:.85rem"><span>7 labs</span><span>89 formulas explained</span><span>67 practice questions</span></div>
+</header>
+
+<section class="lab" id="labs" style="border-top:0;padding-top:8px">
+  <h2>The labs</h2>
+  <div class="labgrid">
+<div class="labcard">
+  <div class="num">01</div>
+  <h3><a href="https://cad281.github.io/ese123-lab1/" style="color:inherit;text-decoration:none">Lab 1 · DC Power &amp; Ohm’s Law</a></h3>
+  <p>Safe power limits, the bench supply’s CV and CC modes, measuring a resistor’s I–V line and an LED that ignores Ohm’s law.</p>
+  <div class="chips"><span class="chip">Power supply</span><span class="chip">Google Sheets</span></div>
+  <div class="chips"><span class="chip k">Ohm’s law</span><span class="chip k">Power &amp; derating</span><span class="chip k">CV vs CC</span></div>
+  <div class="meta"><span>10 formulas</span><span>8 practice questions</span></div>
+  <div class="links"><a href="https://cad281.github.io/ese123-lab1/">Open interactive guide →</a><a href="https://github.com/cad281/ese123-lab1#readme">Text guide (README)</a></div>
+</div><div class="labcard">
+  <div class="num">02</div>
+  <h3><a href="https://cad281.github.io/ese123-lab2/" style="color:inherit;text-decoration:none">Lab 2 · Digital Multimeter</a></h3>
+  <p>Volts, amps, ohms and continuity on the 34461A; KVL with stacked supplies; series and parallel; 2-wire vs 4-wire; how the meter loads a circuit.</p>
+  <div class="chips"><span class="chip">DMM</span><span class="chip">Power supply</span></div>
+  <div class="chips"><span class="chip k">KVL</span><span class="chip k">Series &amp; parallel</span><span class="chip k">Voltage divider</span></div>
+  <div class="meta"><span>12 formulas</span><span>9 practice questions</span></div>
+  <div class="links"><a href="https://cad281.github.io/ese123-lab2/">Open interactive guide →</a><a href="https://github.com/cad281/ese123-lab2#readme">Text guide (README)</a></div>
+</div><div class="labcard">
+  <div class="num">03</div>
+  <h3><a href="https://cad281.github.io/ese123-lab3/" style="color:inherit;text-decoration:none">Lab 3 · SPICE &amp; Soldering</a></h3>
+  <p>Draw and solve circuits in LTspice (.OP, .DC), reduce a series-parallel network by hand, and solder your first parts onto the project board.</p>
+  <div class="chips"><span class="chip">LTspice</span><span class="chip">Soldering iron</span><span class="chip">DMM</span></div>
+  <div class="chips"><span class="chip k">Parallel resistors</span><span class="chip k">Divider</span><span class="chip k">SPICE prefixes</span></div>
+  <div class="meta"><span>11 formulas</span><span>8 practice questions</span></div>
+  <div class="links"><a href="https://cad281.github.io/ese123-lab3/">Open interactive guide →</a><a href="https://github.com/cad281/ese123-lab3#readme">Text guide (README)</a></div>
+</div><div class="labcard">
+  <div class="num">04</div>
+  <h3><a href="https://cad281.github.io/ese123-lab4/" style="color:inherit;text-decoration:none">Lab 4 · Function Generator &amp; Scope</a></h3>
+  <p>The generator’s hidden 50 Ω, RMS of sine, square and triangle waves, the 10:1 probe, and oscilloscope triggering.</p>
+  <div class="chips"><span class="chip">Function generator</span><span class="chip">Oscilloscope</span><span class="chip">DMM</span></div>
+  <div class="chips"><span class="chip k">RMS</span><span class="chip k">50 Ω divider</span><span class="chip k">Triggering</span></div>
+  <div class="meta"><span>15 formulas</span><span>10 practice questions</span></div>
+  <div class="links"><a href="https://cad281.github.io/ese123-lab4/">Open interactive guide →</a><a href="https://github.com/cad281/ese123-lab4#readme">Text guide (README)</a></div>
+</div><div class="labcard">
+  <div class="num">05</div>
+  <h3><a href="https://cad281.github.io/ese123-lab5/" style="color:inherit;text-decoration:none">Lab 5 · Capacitors &amp; Scope</a></h3>
+  <p>Cursors and automatic measurements, sweeping an RC filter from 3 kHz to 1 Hz, phase, manual scope setup, bypass capacitors.</p>
+  <div class="chips"><span class="chip">Oscilloscope</span><span class="chip">Function generator</span><span class="chip">Soldering</span></div>
+  <div class="chips"><span class="chip k">X_C = 1/(2πfC)</span><span class="chip k">Phase</span><span class="chip k">Frequency response</span></div>
+  <div class="meta"><span>14 formulas</span><span>9 practice questions</span></div>
+  <div class="links"><a href="https://cad281.github.io/ese123-lab5/">Open interactive guide →</a><a href="https://github.com/cad281/ese123-lab5#readme">Text guide (README)</a></div>
+</div><div class="labcard">
+  <div class="num">06</div>
+  <h3><a href="https://cad281.github.io/ese123-lab6/" style="color:inherit;text-decoration:none">Lab 6 · Operational Amplifiers</a></h3>
+  <p>Design a −4.7 inverting amplifier, find where it clips, and test the board’s transimpedance current sensor.</p>
+  <div class="chips"><span class="chip">Op amp (741)</span><span class="chip">Power supply ±15 V</span><span class="chip">Oscilloscope</span></div>
+  <div class="chips"><span class="chip k">Inverting gain</span><span class="chip k">Non-inverting gain</span><span class="chip k">Half-power point</span></div>
+  <div class="meta"><span>15 formulas</span><span>10 practice questions</span></div>
+  <div class="links"><a href="https://cad281.github.io/ese123-lab6/">Open interactive guide →</a><a href="https://github.com/cad281/ese123-lab6#readme">Text guide (README)</a></div>
+</div><div class="labcard">
+  <div class="num">07</div>
+  <h3><a href="https://cad281.github.io/ese123-lab7/" style="color:inherit;text-decoration:none">Lab 7 · Assembly Language &amp; Buzzer</a></h3>
+  <p>Install the ATmega4809, program it in assembly with MPLAB X, count clock cycles, and turn delay loops into a 440 Hz tone.</p>
+  <div class="chips"><span class="chip">MPLAB X</span><span class="chip">ATmega4809</span><span class="chip">Oscilloscope</span></div>
+  <div class="chips"><span class="chip k">Cycle counting</span><span class="chip k">Bit masks</span><span class="chip k">f = f_clk / cycles</span></div>
+  <div class="meta"><span>12 formulas</span><span>13 practice questions</span></div>
+  <div class="links"><a href="https://cad281.github.io/ese123-lab7/">Open interactive guide →</a><a href="https://github.com/cad281/ese123-lab7#readme">Text guide (README)</a></div>
+</div>
+  </div>
+</section>
+
+<section class="lab" id="how">
+  <h2>How to use these guides</h2>
+  <div class="use">
+    <div class="panel"><h3>Before lab</h3><p class="small">Read the guide and play with the simulations. Predict your readings so you know when a measurement looks wrong.</p></div>
+    <div class="panel"><h3>During lab</h3><p class="small">Keep the formula sheet open. Each formula says when to use it and has a worked example with that lab’s parts.</p></div>
+    <div class="panel"><h3>After lab</h3><p class="small">Try the practice questions (new numbers, same ideas as the quizzes), then follow the report guide for each question.</p></div>
+    <div class="panel"><h3>On your phone</h3><p class="small">Every page works on a phone. The text-only README version of each lab is on GitHub too.</p></div>
+  </div>
+</section>
+
+<section class="lab" id="equipment">
+  <h2>Where each instrument is taught</h2>
+  <div class="tblwrap"><table><thead><tr><th>Instrument or tool</th><th>Labs</th></tr></thead><tbody><tr><td>Power supply</td><td><a href="https://cad281.github.io/ese123-lab1/">Lab 1</a>, <a href="https://cad281.github.io/ese123-lab2/">Lab 2</a></td></tr><tr><td>Google Sheets</td><td><a href="https://cad281.github.io/ese123-lab1/">Lab 1</a></td></tr><tr><td>DMM</td><td><a href="https://cad281.github.io/ese123-lab2/">Lab 2</a>, <a href="https://cad281.github.io/ese123-lab3/">Lab 3</a>, <a href="https://cad281.github.io/ese123-lab4/">Lab 4</a></td></tr><tr><td>LTspice</td><td><a href="https://cad281.github.io/ese123-lab3/">Lab 3</a></td></tr><tr><td>Soldering iron</td><td><a href="https://cad281.github.io/ese123-lab3/">Lab 3</a></td></tr><tr><td>Function generator</td><td><a href="https://cad281.github.io/ese123-lab4/">Lab 4</a>, <a href="https://cad281.github.io/ese123-lab5/">Lab 5</a></td></tr><tr><td>Oscilloscope</td><td><a href="https://cad281.github.io/ese123-lab4/">Lab 4</a>, <a href="https://cad281.github.io/ese123-lab5/">Lab 5</a>, <a href="https://cad281.github.io/ese123-lab6/">Lab 6</a>, <a href="https://cad281.github.io/ese123-lab7/">Lab 7</a></td></tr><tr><td>Soldering</td><td><a href="https://cad281.github.io/ese123-lab5/">Lab 5</a></td></tr><tr><td>Op amp (741)</td><td><a href="https://cad281.github.io/ese123-lab6/">Lab 6</a></td></tr><tr><td>Power supply ±15 V</td><td><a href="https://cad281.github.io/ese123-lab6/">Lab 6</a></td></tr><tr><td>MPLAB X</td><td><a href="https://cad281.github.io/ese123-lab7/">Lab 7</a></td></tr><tr><td>ATmega4809</td><td><a href="https://cad281.github.io/ese123-lab7/">Lab 7</a></td></tr></tbody></table></div>
+</section>
+
+<section class="lab">
+  <p class="small">Made for ESE 123 students by a TA. These guides add to the official handouts on Brightspace and don’t replace them; if anything differs, follow your handout and your TA. Simulated values are typical; your bench readings will differ a little.</p>
+</section>
+</div>
+
+</html>
