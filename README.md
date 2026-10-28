@@ -14,6 +14,17 @@ Interactive, animated walkthroughs of every ESE 123 lab (Stony Brook University)
 | 6 | Operational Amplifiers | https://cad281.github.io/ese123-lab6/ | [cad281/ese123-lab6](https://github.com/cad281/ese123-lab6) |
 | 7 | Assembly Language & Buzzer | https://cad281.github.io/ese123-lab7/ | [cad281/ese123-lab7](https://github.com/cad281/ese123-lab7) |
 
+## My lab reports (Jenny Chen)
+
+| Lab | Report | File |
+|---|---|---|
+| 1 | I-V Characteristics of a Resistor and an LED | [PDF](reports/ESE123_Lab1_Report_JennyChen.pdf) |
+| 2 | KVL and DMM Measurements | [PDF](reports/ESE123_Lab2_Report_JennyChen.pdf) |
+| 3 | Voltage Divider | [PDF](reports/ESE123_Lab3_Report_JennyChen.pdf) |
+| 4 | Function Generator and Oscilloscope | [PDF](reports/ESE123_Lab4_Report_JennyChen.pdf) |
+| 5 | Capacitors and Oscilloscope | [PDF](reports/ESE123_Lab5_Report_JennyChen.pdf) |
+| 6 | Operational Amplifiers | [PDF](reports/ESE123_Lab6_Report_JennyChen.pdf) |
+
 ## How to use them
 
 - **Before lab:** read the guide and try the simulations so you can predict your readings.
