@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ESE 123 Midterm Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Same look as the lab guides: one reading column, cards per lab, practice bank at the end */
+:root{
+  --bg:#eceff3; --panel:#ffffff; --ink:#17212b; --muted:#56636f; --line:#d2d8df;
+  --accent:#1d5bb8; --accent-soft:#dfe8f7; --warn:#b4480f; --warn-soft:#fbe9df; --ok:#17803d; --ok-soft:#e1f3e7;
+  --f-display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1319; --panel:#151c24; --ink:#e4e9ee; --muted:#97a3af; --line:#2a343f;
+  --accent:#74a9ff; --accent-soft:#1b2a40; --warn:#ff9a62; --warn-soft:#3a2216; --ok:#4fd27f; --ok-soft:#173222; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1319; --panel:#151c24; --ink:#e4e9ee; --muted:#97a3af; --line:#2a343f;
+  --accent:#74a9ff; --accent-soft:#1b2a40; --warn:#ff9a62; --warn-soft:#3a2216; --ok:#4fd27f; --ok-soft:#173222; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;padding:0 16px 64px}
+.wrap{max-width:920px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.12;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.2rem,6vw,3.2rem)}
+h2{font-size:clamp(1.6rem,4vw,2rem)}
+h3{font-size:1.2rem;font-weight:600}
+p{margin:0;max-width:70ch}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+header.hero{padding:36px 0 20px;display:grid;gap:12px}
+.lede{font-size:1.08rem;color:var(--muted)}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px}
+nav.toc a{font-family:var(--f-mono);font-size:.8rem;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--panel);padding:6px 10px;border-radius:6px}
+nav.toc a:hover{border-color:var(--accent);color:var(--accent)}
+section{padding:36px 0 8px;border-top:1px solid var(--line);display:grid;gap:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:10px;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.big{font-size:1.1rem;padding:12px 14px;border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0}
+.eq{font-family:var(--f-mono);font-size:1rem;padding:8px 10px;background:var(--bg);border-radius:6px;overflow-x:auto;white-space:pre-wrap}
+.tblwrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td.f{font-family:var(--f-mono)}
+.wrap{min-width:0}
+p,li{overflow-wrap:anywhere}
+.warn{background:var(--warn-soft);border-left:4px solid var(--warn);border-radius:0 8px 8px 0;padding:10px 14px;display:grid;gap:6px}
+.warn b:first-child{color:var(--warn)}
+.mine{background:var(--ok-soft);border-left:4px solid var(--ok);border-radius:0 8px 8px 0;padding:10px 14px;display:grid;gap:6px}
+ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+svg.fig{width:100%;max-width:340px;height:auto;justify-self:center}
+svg.fig .w{stroke:var(--ink);stroke-width:2;fill:none}
+svg.fig text{fill:var(--ink);font-family:var(--f-mono);font-size:12px}
+svg.fig .a{fill:var(--accent)}
+.two{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:center}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+.filters{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+button{font:inherit;font-family:var(--f-mono);font-size:.82rem;padding:6px 11px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.on{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.score{font-family:var(--f-mono);font-size:.85rem;color:var(--muted)}
+ol.qs{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ol.qs li{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:grid;gap:8px}
+ol.qs li.done{border-color:var(--ok)}
+ol.qs li.again{border-color:var(--warn)}
+.qh{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.qn{font-family:var(--f-mono);font-weight:600;color:var(--accent)}
+.tag{font-family:var(--f-mono);font-size:.7rem;padding:1px 7px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+details summary{cursor:pointer;font-family:var(--f-mono);font-size:.85rem;color:var(--accent)}
+details[open] summary{margin-bottom:6px}
+.ans{display:grid;gap:6px}
+.ans .eq{font-size:.9rem}
+.mark{display:flex;gap:6px;flex-wrap:wrap}
+.small{font-size:.88rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">ESE 123 · Fall 2026 · Labs 1–6</div>
+  <h1>Midterm Review</h1>
+  <p class="lede">Everything from Labs 1–6 in plain words: one big idea per lab, the formulas you need, the mistakes I made in my own reports, and 46 practice questions with worked answers.</p>
+  <nav class="toc">
+    <a href="#plan">Study plan</a><a href="#basics">Basics</a><a href="#lab1">Lab 1</a><a href="#lab2">Lab 2</a><a href="#lab3">Lab 3</a>
+    <a href="#lab4">Lab 4</a><a href="#lab5">Lab 5</a><a href="#lab6">Lab 6</a><a href="#sheet">Formula sheet</a><a href="#practice">Practice questions</a>
+    <a href="../">← All lab guides</a>
+  </nav>
+</header>
+
+<section id="plan">
+  <h2>How to study with this page</h2>
+  <div class="grid">
+    <div class="panel"><h3>1. Read one lab</h3><p class="small">Read the big idea, then cover the formula table and say each formula out loud with its units.</p></div>
+    <div class="panel"><h3>2. Do its questions</h3><p class="small">In Practice, pick that lab. Work each question on paper <b>before</b> opening the answer.</p></div>
+    <div class="panel"><h3>3. Mark yourself</h3><p class="small">Click “Got it” or “Review again”. Then use “Only review again” to redo the hard ones.</p></div>
+    <div class="panel"><h3>4. Last day</h3><p class="small">Read only the formula sheet and the “Watch out” boxes. The exam is on paper with a calculator, so practice writing the steps.</p></div>
+  </div>
+</section>
+
+<section id="basics">
+  <h2>Basics used in every lab</h2>
+  <div class="grid">
+    <div class="panel"><h3>Ohm’s law and power</h3>
+      <div class="eq">V = I·R     I = V/R     R = V/I
+P = V·I = I²·R = V²/R</div>
+      <p class="small">Units: V in volts, I in amps, R in ohms, P in watts.</p></div>
+    <div class="panel"><h3>Percent error</h3>
+      <div class="eq">% error = (measured − expected) / expected × 100%</div>
+      <p class="small">Divide by the <b>expected</b> (nominal or calculated) value, not the measured one.</p></div>
+    <div class="panel"><h3>Prefixes</h3>
+      <div class="eq">p 10⁻¹²  n 10⁻⁹  µ 10⁻⁶  m 10⁻³
+k 10³    M 10⁶</div>
+      <p class="small">100 nF = 100×10⁻⁹ F = 1×10⁻⁷ F. Convert to base units before you calculate.</p></div>
+  </div>
+</section>
+
+<!-- ============ LAB 1 ============ -->
+<section id="lab1">
+  <div class="eyebrow">Lab 1</div>
+  <h2>DC power supply, Ohm’s law, and the LED</h2>
+  <p class="big">A resistor gives a <b>straight line</b> on an I-V graph. An LED gives a <b>curve</b>, so it has no single resistance.</p>
+  <div class="tblwrap"><table>
+    <tr><th>Idea</th><th>Formula</th><th>What it means</th></tr>
+    <tr><td>Conductance</td><td class="f">G = ΔI / ΔV</td><td>Slope of a graph with I on the y-axis and V on the x-axis. Unit: siemens (S).</td></tr>
+    <tr><td>Resistance</td><td class="f">R = 1 / G</td><td>Flip the slope to get ohms.</td></tr>
+    <tr><td>Differential resistance</td><td class="f">R<sub>d</sub> = ΔV / ΔI</td><td>Use two <b>neighboring</b> points on a curve. Small R<sub>d</sub> means the LED is fully on.</td></tr>
+    <tr><td>Tolerance range</td><td class="f">R<sub>nom</sub> × (1 ± tol)</td><td>1 Ω ±5% means 0.95 to 1.05 Ω.</td></tr>
+  </table></div>
+  <div class="grid">
+    <div class="panel"><h3>CV and CC modes</h3><p>The supply holds the <b>voltage</b> you set (CV) until the load wants more than the current limit. Then it holds the <b>current</b> at the limit (CC) and lowers the voltage.</p></div>
+    <div class="panel"><h3>Why the LED is a curve</h3><p>Below about 2 V, almost no current flows. Above about 2.5 V, a little more voltage gives a lot more current, which is exponential.</p></div>
+  </div>
+  <div class="mine"><b>From my report</b><p>Resistor slope = 1.003 S → R = 0.997 Ω (−0.3%). LED R<sub>d</sub>: about 30 Ω at high current and about 570 Ω at low current.</p></div>
+  <div class="warn"><b>Watch out (mistakes from my draft)</b>
+    <ul><li>The slope of I vs. V is <b>G</b>, not R. Flip it.</li>
+    <li>R<sub>d</sub> = ΔV/ΔI. I first wrote ΔI/ΔV.</li>
+    <li>Copy numbers from the table carefully. I used 0.000080 A instead of 0.00088 A, so I got 6410 Ω instead of 570 Ω.</li>
+    <li>An LED does <b>not</b> obey Ohm’s law.</li></ul></div>
+</section>
+
+<!-- ============ LAB 2 ============ -->
+<section id="lab2">
+  <div class="eyebrow">Lab 2</div>
+  <h2>DMM, KVL, series and parallel</h2>
+  <p class="big">Voltages around any closed loop add to zero (KVL). The DMM measures voltage <b>across</b> a part and current <b>through</b> it, and it slightly changes the circuit.</p>
+  <div class="two">
+    <div class="tblwrap"><table>
+      <tr><th>Idea</th><th>Formula</th></tr>
+      <tr><td>KVL</td><td class="f">Σ V around a loop = 0</td></tr>
+      <tr><td>Series sources</td><td class="f">V = V₁ + V₂ (same direction)</td></tr>
+      <tr><td>Series R</td><td class="f">R = R₁ + R₂ + …</td></tr>
+      <tr><td>Parallel R (two)</td><td class="f">R = R₁R₂ / (R₁ + R₂)</td></tr>
+      <tr><td>Parallel R (any)</td><td class="f">1/R = 1/R₁ + 1/R₂ + …</td></tr>
+      <tr><td>Divider</td><td class="f">V<sub>out</sub> = V<sub>S</sub>·R₂/(R₁ + R₂)</td></tr>
+      <tr><td>Lead resistance</td><td class="f">R<sub>lead</sub> = (R<sub>with</sub> − R<sub>nulled</sub>)/2</td></tr>
+    </table></div>
+    <svg class="fig" viewBox="0 0 300 200" role="img" aria-label="Ammeter in series, voltmeter in parallel">
+      <path class="w" d="M40 60 V30 H110 M150 30 H260 V170 H40 V100"/>
+      <circle class="w" cx="40" cy="80" r="18"/><text x="34" y="76">+</text><text x="34" y="92">−</text>
+      <circle class="w" cx="130" cy="30" r="18"/><text x="125" y="35">A</text>
+      <path class="w" d="M260 80 l10 5 -20 10 20 10 -20 10 20 10 -10 5"/>
+      <path class="w" d="M260 70 H220 V95 M220 135 V150 H260"/>
+      <circle class="w" cx="220" cy="115" r="18"/><text x="215" y="120">V</text>
+      <text x="100" y="66" class="a">A: in series</text><text x="120" y="190" class="a">V: in parallel</text>
+    </svg>
+  </div>
+  <div class="grid">
+    <div class="panel"><h3>DMM loading</h3><p>In voltage mode the DMM is a 10 MΩ resistor in parallel with whatever you measure. That doesn’t matter for small resistors, but with resistors in the MΩ range the reading comes out low.</p></div>
+    <div class="panel"><h3>Never measure R with power on</h3><p>The ohmmeter sends its own small current. An outside source adds to that current, so the reading is wrong, and the meter can be damaged.</p></div>
+    <div class="panel"><h3>Ammeter in parallel = short</h3><p>An ammeter has almost 0 Ω. Put it across a part and a large current flows, which can blow the meter’s fuse.</p></div>
+  </div>
+  <div class="mine"><b>From my report</b><p>1 V + 2 V = 3 V, measured 2.99997 V. With R = 300 Ω, I = 10.047 mA (in the 9.52–10.53 mA range). 98.86 + 197.04 = 295.90 Ω vs. 295.71 Ω measured (0.06%). Each lead ≈ 0.109 Ω.</p></div>
+  <div class="warn"><b>Watch out (mistakes from my draft)</b>
+    <ul><li>Check the arithmetic: (295.90 − 295.71)/295.90 is 0.06%, not 1.21%.</li>
+    <li>1.63 + 1.68 = 3.31 V = V<sub>S</sub>, so KVL <b>holds</b>.</li>
+    <li>Always write units. “0.6” alone is not an answer; 0.6 MΩ is.</li></ul></div>
+</section>
+
+<!-- ============ LAB 3 ============ -->
+<section id="lab3">
+  <div class="eyebrow">Lab 3</div>
+  <h2>Voltage dividers and LTspice</h2>
+  <p class="big">To solve a messy resistor network, <b>collapse</b> each group into one equivalent resistor, then use the divider formula.</p>
+  <div class="two">
+    <div class="panel">
+      <div class="eq">V<sub>out</sub> = V<sub>in</sub> · R<sub>bottom</sub> / (R<sub>top</sub> + R<sub>bottom</sub>)</div>
+      <ul>
+        <li>V<sub>out</sub> is always between 0 and V<sub>in</sub>.</li>
+        <li>The bigger resistor gets the bigger share of the voltage.</li>
+        <li>If a load is connected at V<sub>out</sub>, combine it in parallel with R<sub>bottom</sub> <b>first</b>. V<sub>out</sub> drops.</li>
+        <li>A parallel combination is always <b>smaller</b> than its smallest resistor. Use this to check your answer.</li>
+      </ul>
+    </div>
+    <svg class="fig" viewBox="0 0 220 220" role="img" aria-label="Voltage divider">
+      <path class="w" d="M60 20 V40 M60 100 V120 M60 180 V200 H40 M60 20 H40 M60 110 H160"/>
+      <path class="w" d="M60 40 l10 5 -20 10 20 10 -20 10 20 10 -20 10 10 5"/>
+      <path class="w" d="M60 120 l10 5 -20 10 20 10 -20 10 20 10 -20 10 10 5"/>
+      <text x="80" y="75">R_top</text><text x="80" y="155">R_bottom</text>
+      <text x="4" y="24">V_in</text><text x="10" y="204">0 V</text><text x="164" y="114" class="a">V_out</text>
+    </svg>
+  </div>
+  <div class="panel"><h3>LTspice reminders</h3>
+    <ul><li><b>.op</b> gives DC node voltages and currents. <b>.dc</b> sweeps a source.</li>
+    <li>In SPICE, <b>M = milli</b>. Write <b>Meg</b> for mega: “1M” is 1 mΩ, and “1Meg” is 1 MΩ.</li>
+    <li>Every circuit needs a ground node (0).</li></ul></div>
+  <div class="mine"><b>From my report</b><p>3 V, 1 kΩ (top), 2 kΩ (bottom) → V<sub>out</sub> = 2 V, I = 1 mA. On the board: 9.1k ∥ 13k = 5.35 kΩ (top), 22k ∥ 18k ∥ 27k = 7.24 kΩ (bottom), so TP1 = 5 × 7.24/(5.35 + 7.24) ≈ 2.87 V.</p></div>
+</section>
+
+<!-- ============ LAB 4 ============ -->
+<section id="lab4">
+  <div class="eyebrow">Lab 4</div>
+  <h2>Function generator and oscilloscope</h2>
+  <p class="big">The generator has a hidden 50 Ω inside and assumes a 50 Ω load. Into a high-impedance load (DMM, scope, op amp) you get about <b>twice</b> what you set.</p>
+  <div class="two">
+    <div class="panel">
+      <div class="eq">V<sub>s</sub> = 2 × (setting)
+V<sub>out</sub> = V<sub>s</sub> · R<sub>L</sub> / (50 + R<sub>L</sub>)</div>
+      <ul><li>R<sub>L</sub> = 50 Ω → V<sub>out</sub> = setting ✔</li>
+      <li>R<sub>L</sub> ≈ 10 MΩ (DMM or scope) → V<sub>out</sub> ≈ 2 × setting</li></ul>
+    </div>
+    <svg class="fig" viewBox="0 0 280 160" role="img" aria-label="Generator with internal 50 ohm">
+      <rect x="10" y="10" width="140" height="140" rx="8" fill="none" stroke="currentColor" stroke-dasharray="4 4" style="color:var(--muted)"/>
+      <circle class="w" cx="45" cy="80" r="18"/><path class="w" d="M36 80 q5 -10 9 0 t9 0"/>
+      <path class="w" d="M45 62 V30 H70 l5 -8 10 16 10 -16 10 16 10 -16 5 8 H240 V60 M45 98 V130 H240 V100"/>
+      <path class="w" d="M240 60 l10 5 -20 10 20 10 -20 10 10 5"/>
+      <text x="80" y="54">50 Ω</text><text x="20" y="146">inside the generator</text><text x="200" y="85" class="a">R_L</text>
+    </svg>
+  </div>
+  <div class="tblwrap"><table>
+    <tr><th>Wave</th><th>RMS</th><th>Example: 1 V<sub>pp</sub> (V<sub>p</sub> = 0.5 V)</th></tr>
+    <tr><td>Sine</td><td class="f">V<sub>p</sub> / √2</td><td class="f">0.354 V</td></tr>
+    <tr><td>Square (50%, symmetric)</td><td class="f">V<sub>p</sub></td><td class="f">0.500 V</td></tr>
+    <tr><td>Triangle</td><td class="f">V<sub>p</sub> / √3</td><td class="f">0.289 V</td></tr>
+  </table></div>
+  <div class="grid">
+    <div class="panel"><h3>Reading the scope</h3><div class="eq">V = (boxes) × (V/div)
+T = (boxes) × (s/div)
+f = 1 / T</div></div>
+    <div class="panel"><h3>10:1 probe</h3><p>The probe divides the signal by 10. The scope must be set to 10:1 to show the true value; at 1:1 the reading is 10× too small.</p></div>
+    <div class="panel"><h3>Triggering</h3><p>The scope starts each sweep at the same point of the <b>trigger source</b>, so that wave stands still. A wave from another instrument drifts.</p></div>
+  </div>
+  <div class="mine"><b>From my report</b><p>Set to 1 V<sub>rms</sub>. With only the DMM connected it read 2.005 V (+100%). With 50.13 Ω connected it read 0.996 V; expected 2 × 50.13/100.13 = 1.0013 V. The scope showed 2 V<sub>pp</sub> for a 1 V<sub>pp</sub> setting.</p></div>
+</section>
+
+<!-- ============ LAB 5 ============ -->
+<section id="lab5">
+  <div class="eyebrow">Lab 5</div>
+  <h2>Capacitors and the RC high-pass filter</h2>
+  <p class="big">A capacitor <b>blocks low frequencies</b> and passes high ones. Its “resistance” (reactance) gets smaller as frequency goes up.</p>
+  <div class="tblwrap"><table>
+    <tr><th>Idea</th><th>Formula</th><th>Meaning</th></tr>
+    <tr><td>Reactance</td><td class="f">X<sub>C</sub> = 1 / (2πfC)</td><td>Big at low f, small at high f</td></tr>
+    <tr><td>Corner frequency</td><td class="f">f<sub>c</sub> = 1 / (2πRC)</td><td>Where X<sub>C</sub> = R</td></tr>
+    <tr><td>High-pass gain</td><td class="f">(f/f<sub>c</sub>) / √(1 + (f/f<sub>c</sub>)²)</td><td>0.707 at f<sub>c</sub>; ≈1 well above; ≈f/f<sub>c</sub> well below</td></tr>
+    <tr><td>High-pass phase</td><td class="f">φ = 90° − arctan(f/f<sub>c</sub>)</td><td>Output <b>leads</b>: 45° at f<sub>c</sub>, → 0° high, → 90° low</td></tr>
+    <tr><td>Phase from scope</td><td class="f">φ = 360° × Δt / T</td><td>Δt = time shift between the two waves</td></tr>
+  </table></div>
+  <div class="grid">
+    <div class="panel"><h3>Three ways to measure</h3><p>Counting boxes (least precise), cursors, and automatic measurements (easiest). They should agree within a few percent.</p></div>
+    <div class="panel"><h3>Low-level readings</h3><p>At very low frequency the output is only millivolts, so noise makes the magnitude and phase unreliable. Say so in your answer.</p></div>
+  </div>
+  <div class="mine"><b>From my report</b><p>R = 4.75 kΩ and C = 100 nF give f<sub>c</sub> ≈ 335 Hz. At 300 Hz: 1.29 V measured vs. 1.32 V theory, phase ≈ 45°. Board divider: TP2 = 5.079 × 150k/209k = 3.645 V; measured 3.63 V (−0.42%).</p></div>
+  <div class="warn"><b>Watch out</b><ul><li>The scope may show the phase as negative when channel 2 leads. Explain the sign in words.</li><li>Use f in Hz and C in farads: 100 nF = 1×10⁻⁷ F.</li></ul></div>
+</section>
+
+<!-- ============ LAB 6 ============ -->
+<section id="lab6">
+  <div class="eyebrow">Lab 6</div>
+  <h2>Operational amplifiers</h2>
+  <p class="big">With negative feedback, an op amp makes its two inputs equal (V<sub>+</sub> = V<sub>−</sub>) and draws no input current. Every gain formula comes from these two rules.</p>
+  <div class="two">
+    <div class="tblwrap"><table>
+      <tr><th>Circuit</th><th>Gain</th></tr>
+      <tr><td>Inverting</td><td class="f">A<sub>v</sub> = −R<sub>f</sub> / R<sub>in</sub></td></tr>
+      <tr><td>Non-inverting</td><td class="f">A<sub>v</sub> = 1 + R<sub>f</sub> / R<sub>g</sub></td></tr>
+      <tr><td>Buffer (follower)</td><td class="f">A<sub>v</sub> = 1</td></tr>
+      <tr><td>Current sense</td><td class="f">V<sub>out</sub> = I · R<sub>sense</sub> · A<sub>v</sub></td></tr>
+      <tr><td>Feedback RC corner</td><td class="f">f<sub>c</sub> = 1/(2πR<sub>f</sub>C)</td></tr>
+    </table></div>
+    <svg class="fig" viewBox="0 0 300 180" role="img" aria-label="Inverting amplifier">
+      <path class="w" d="M20 70 H50 l5 -8 10 16 10 -16 10 16 10 -16 5 8 H130 M130 70 V30 H160 l5 -8 10 16 10 -16 10 16 10 -16 5 8 H250 V100 M130 70 H150 M150 130 H140 V150 M250 100 H280"/>
+      <path class="w" d="M150 50 V150 L250 100 Z"/>
+      <path class="w" d="M130 160 h20 M134 166 h12 M138 172 h4 M140 150 V160"/>
+      <text x="156" y="76">−</text><text x="156" y="134">+</text>
+      <text x="62" y="96">R_in</text><text x="170" y="20">R_f</text><text x="4" y="66">V_in</text><text x="254" y="94" class="a">V_out</text>
+    </svg>
+  </div>
+  <div class="grid">
+    <div class="panel"><h3>Clipping</h3><p>The output can’t go past the supply rails. A 741 on ±15 V swings to about ±13 V. If gain × input is bigger than that, the tops get flattened.</p></div>
+    <div class="panel"><h3>Sanity check</h3><p>A swing larger than the total supply span (30 V for ±15 V) is impossible, so a reading like that means a measurement mistake.</p></div>
+  </div>
+  <div class="mine"><b>From my report</b><p>R<sub>in</sub> = 10 kΩ, R<sub>f</sub> = 47 kΩ → −4.7. Measured 2.761/0.5775 = −4.78 (+1.7%). Board: 1 + 150k/4.75k = 32.58, and 0.07 Ω × 32.58 = 2.281 Ω, but I measured only about 0.14 Ω, so that stage needs checking.</p></div>
+  <div class="warn"><b>Watch out</b><ul><li>Inverting gain is <b>negative</b>. Keep the minus sign.</li><li>The non-inverting gain has the “1 +”.</li><li>A triangle wave’s RMS is V<sub>pp</sub>/(2√3).</li></ul></div>
+</section>
+
+<!-- ============ FORMULA SHEET ============ -->
+<section id="sheet">
+  <h2>One-page formula sheet</h2>
+  <div class="tblwrap"><table>
+    <tr><th>Lab</th><th>Formula</th></tr>
+    <tr><td>All</td><td class="f">V = IR   P = VI = I²R = V²/R   %err = (meas − exp)/exp × 100%</td></tr>
+    <tr><td>1</td><td class="f">G = ΔI/ΔV   R = 1/G   R_d = ΔV/ΔI</td></tr>
+    <tr><td>2</td><td class="f">ΣV = 0   R_s = R₁ + R₂   R_p = R₁R₂/(R₁ + R₂)   I_max = V/R_min</td></tr>
+    <tr><td>2, 3</td><td class="f">V_out = V_in·R₂/(R₁ + R₂)   (load: R₂ → R₂ ∥ R_L)</td></tr>
+    <tr><td>4</td><td class="f">V_out = 2·set·R_L/(50 + R_L)   V_p = V_pp/2   sine V_p/√2   square V_p   triangle V_p/√3</td></tr>
+    <tr><td>4, 5</td><td class="f">V = boxes × V/div   T = boxes × s/div   f = 1/T   φ = 360°·Δt/T</td></tr>
+    <tr><td>5</td><td class="f">X_C = 1/(2πfC)   f_c = 1/(2πRC)   |H| at f_c = 0.707</td></tr>
+    <tr><td>6</td><td class="f">inverting −R_f/R_in   non-inverting 1 + R_f/R_g   V = I·R_s·A_v</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ PRACTICE ============ -->
+<section id="practice">
+  <h2>Practice questions</h2>
+  <p class="small">New numbers, same ideas as the labs. Work on paper first, then open the answer. Your marks are saved only in this browser.</p>
+  <div class="filters" id="filters"></div>
+  <div class="filters"><button id="onlyAgain">Only “review again”</button><button id="reset">Clear my marks</button><span class="score" id="score"></span></div>
+  <ol class="qs" id="qs"></ol>
+</section>
+
+<section>
+  <p class="small">Made from my own Lab 1–6 reports and the lab handouts. If anything here differs from the handout or lecture, follow the handout.</p>
+</section>
+</div>
+
+<script>
+// Each question: lab, question text, answer (short), work (steps). HTML allowed.
+const Q = [
+  // Lab 1
+  [1, "A 4.7 kΩ resistor is connected to 12 V. Find the current and the power.", "I = 2.55 mA, P = 30.6 mW", "I = 12 / 4700 = 2.55 mA\nP = V²/R = 144 / 4700 = 0.0306 W = 30.6 mW"],
+  [1, "Two points on a resistor’s I-V graph (I on y, V on x): (0.2 V, 40 mA) and (0.6 V, 120 mA). Find G and R.", "G = 0.2 S, R = 5 Ω", "G = ΔI/ΔV = (0.120 − 0.040)/(0.6 − 0.2) = 0.08/0.4 = 0.2 S\nR = 1/G = 5 Ω"],
+  [1, "A 100 Ω resistor is rated ¼ W. What is the largest voltage you can safely put across it?", "5 V", "P = V²/R  →  V = √(P·R) = √(0.25 × 100) = √25 = 5 V"],
+  [1, "An LED reads (2.90 V, 4 mA) and (3.00 V, 9 mA). Find its differential resistance.", "R_d = 20 Ω", "R_d = ΔV/ΔI = (3.00 − 2.90)/(0.009 − 0.004) = 0.10/0.005 = 20 Ω"],
+  [1, "The supply is set to 5 V with a 20 mA current limit. You connect 100 Ω. What mode is it in, and what are V and I?", "CC mode: I = 20 mA, V = 2 V", "At 5 V the load would draw 5/100 = 50 mA > 20 mA limit.\nSo the supply switches to CC: I = 20 mA, V = I·R = 0.020 × 100 = 2 V"],
+  [1, "You measure a 1 Ω ±5% resistor as 1.04 Ω. What is the % error? Is it within tolerance?", "+4%, yes", "% error = (1.04 − 1)/1 × 100% = +4%\nRange 0.95–1.05 Ω, so it is within tolerance."],
+  [1, "Why can’t you give one resistance value for an LED?", "Its I-V curve isn’t a straight line", "Ohm’s law needs a constant V/I. For an LED, V/I changes a lot with current: almost no current below ~2 V, then current rises exponentially. So it doesn’t obey Ohm’s law."],
+  // Lab 2
+  [2, "A 3 V and a 2 V source are in series (same direction) with 1 kΩ. Find the current. What if the 2 V source is flipped?", "5 mA; flipped: 1 mA", "Same direction: V = 3 + 2 = 5 V → I = 5/1000 = 5 mA\nFlipped: V = 3 − 2 = 1 V → I = 1 mA"],
+  [2, "Find the series and parallel combinations of 220 Ω and 330 Ω.", "Series 550 Ω, parallel 132 Ω", "Series: 220 + 330 = 550 Ω\nParallel: 220·330/(220 + 330) = 72600/550 = 132 Ω\nCheck: 132 < 220 ✔"],
+  [2, "Three 3 kΩ resistors are in parallel. What is the total?", "1 kΩ", "Equal resistors in parallel: R/n = 3k/3 = 1 kΩ"],
+  [2, "5 V is across a 470 Ω ±10% resistor. What are the minimum and maximum currents?", "9.67 mA to 11.82 mA", "R_min = 470 × 0.9 = 423 Ω → I_max = 5/423 = 11.82 mA\nR_max = 470 × 1.1 = 517 Ω → I_min = 5/517 = 9.67 mA"],
+  [2, "A small resistor reads 0.52 Ω with the test leads, and 0.30 Ω after nulling the leads. What is the resistance of each lead?", "0.11 Ω each", "Both leads = 0.52 − 0.30 = 0.22 Ω\nEach lead = 0.22/2 = 0.11 Ω"],
+  [2, "A divider of two 10 MΩ resistors is fed 10 V. What should V_out be? What does a 10 MΩ DMM actually read across the bottom resistor?", "Should be 5 V; DMM reads 3.33 V", "Ideal: 10 × 10/(10 + 10) = 5 V\nDMM in parallel: 10M ∥ 10M = 5 MΩ\nV = 10 × 5/(10 + 5) = 3.33 V. The meter loads the circuit."],
+  [2, "Design a divider that turns 9 V into 3 V. R₁ (top) = 10 kΩ. Find R₂.", "R₂ = 5 kΩ", "3 = 9·R₂/(10k + R₂)\n3·10k + 3R₂ = 9R₂ → 30k = 6R₂ → R₂ = 5 kΩ"],
+  [2, "You put the DMM in current mode directly across a resistor that is connected to a supply. What happens?", "It shorts the resistor", "An ammeter is almost 0 Ω. In parallel it shorts the part, so a large current flows from the supply and can blow the meter’s fuse. An ammeter must go in series."],
+  [2, "In a series loop, V_S = 6.00 V, V_R1 = 2.48 V, V_R2 = 3.50 V. Does KVL hold? What is the % difference?", "Yes, within 0.33%", "V_R1 + V_R2 = 5.98 V\n(5.98 − 6.00)/6.00 × 100% = −0.33%: KVL holds within meter accuracy."],
+  [2, "Why must you never measure resistance in a powered circuit?", "The ohmmeter uses its own current", "The DMM finds R by sending a small known current and measuring V. An outside source adds its own voltage and current, so the reading is wrong, and the meter can be damaged."],
+  // Lab 3
+  [3, "6 kΩ ∥ 3 kΩ is in series with 1 kΩ, fed 6 V. Find the total R, the current, and the voltage across the parallel part.", "3 kΩ, 2 mA, 4 V", "6k ∥ 3k = 18/9 = 2 kΩ\nTotal = 2k + 1k = 3 kΩ → I = 6/3000 = 2 mA\nV_parallel = 2 mA × 2 kΩ = 4 V"],
+  [3, "12 V divider: R_top = 8 kΩ, R_bottom = 4 kΩ. Find V_out. Then a 4 kΩ load is connected at V_out. Find the new V_out.", "4 V; with load 2.4 V", "No load: 12 × 4/(8 + 4) = 4 V\nLoad: 4k ∥ 4k = 2 kΩ → 12 × 2/(8 + 2) = 2.4 V"],
+  [3, "The top of a divider is 10k ∥ 10k, and the bottom is 20k ∥ 20k ∥ 20k. With 5 V in, find V_out.", "≈ 2.86 V", "Top = 5 kΩ, bottom = 20k/3 = 6.67 kΩ\nV_out = 5 × 6.67/(5 + 6.67) = 2.86 V"],
+  [3, "In LTspice you type a resistor value of “1M”. What value does SPICE use? How do you write 1 megaohm?", "1 mΩ; write 1Meg", "In SPICE, M (or m) means milli. Mega must be written Meg: 1Meg = 1×10⁶ Ω."],
+  [3, "Which LTspice command gives the DC voltage at every node? Which sweeps a source?", ".op and .dc", ".op = operating point (DC bias). .dc = DC sweep of a source."],
+  [3, "Without calculating, which is true: (a) 9.1k ∥ 13k > 9.1k, (b) 9.1k ∥ 13k < 9.1k?", "(b)", "A parallel combination is always smaller than its smallest resistor. (It equals 5.35 kΩ.)"],
+  // Lab 4
+  [4, "The generator is set to 2 V_pp (it expects a 50 Ω load). You view it on the scope (1 MΩ). What V_pp do you see?", "≈ 4 V_pp", "Inside, V_s = 2 × 2 = 4 V_pp. With a very large load, almost no current flows, so nothing drops across the 50 Ω and you see 4 V_pp."],
+  [4, "The generator is set to 1 V_rms and connected to 100 Ω. What is V_out?", "1.33 V_rms", "V_s = 2 V_rms\nV_out = 2 × 100/(50 + 100) = 1.33 V_rms"],
+  [4, "Find the RMS of a 4 V_pp sine, square, and triangle wave.", "1.414 V, 2.000 V, 1.155 V", "V_p = 2 V\nSine 2/√2 = 1.414 V; square 2 V; triangle 2/√3 = 1.155 V"],
+  [4, "A wave is 5 boxes peak to peak at 200 mV/div, and one period is 4 boxes at 0.5 ms/div. Find V_pp, T, and f.", "1 V_pp, 2 ms, 500 Hz", "V_pp = 5 × 0.2 = 1 V\nT = 4 × 0.5 ms = 2 ms\nf = 1/T = 500 Hz"],
+  [4, "You use a 10:1 probe, but the channel is set to 1:1. The real signal is 5 V_pp. What does the scope show?", "0.5 V_pp", "The probe divides by 10, and the scope doesn’t multiply back. 5/10 = 0.5 V_pp (10× too small)."],
+  [4, "Two signals from different instruments are on the scope. One stands still and one drifts. Why?", "Only the trigger source is locked", "Each sweep starts at the same point of the trigger signal, so it looks still. The other has a slightly different frequency, so its phase shifts every sweep."],
+  [4, "Why is a square wave’s RMS larger than a sine wave’s with the same peak?", "It stays at its peak", "A square wave is always at ±V_p, so its average power is V_p². A sine spends most of its time below the peak, so its RMS is V_p/√2."],
+  // Lab 5
+  [5, "Find the reactance of a 100 nF capacitor at 1 kHz and at 10 Hz.", "1.59 kΩ and 159 kΩ", "X_C = 1/(2π·1000·100×10⁻⁹) = 1592 Ω\nAt 10 Hz (100× lower f): 100× larger = 159 kΩ"],
+  [5, "R = 10 kΩ, C = 10 nF. Find the corner frequency.", "≈ 1.59 kHz", "f_c = 1/(2π · 10⁴ · 10⁻⁸) = 1/(2π·10⁻⁴) = 1592 Hz"],
+  [5, "A high-pass filter has a 2 V_rms input at f = f_c. Find the output and the phase.", "1.41 V_rms, leads by 45°", "Gain at f_c = 1/√2 = 0.707 → 2 × 0.707 = 1.41 V_rms\nPhase = 90° − arctan(1) = 45° (output leads)"],
+  [5, "For a high-pass filter, find the gain at f = 10·f_c and f = f_c/10.", "≈ 0.995 and ≈ 0.0995", "x = 10: 10/√101 = 0.995 (passes)\nx = 0.1: 0.1/√1.01 = 0.0995 (blocked)"],
+  [5, "Two 1 kHz waves are 0.1 ms apart. What is the phase difference?", "36°", "T = 1 ms\nφ = 360° × 0.1/1 = 36°"],
+  [5, "AVDD = 5.0 V, R6 = 59 kΩ (top), R7 = 150 kΩ (bottom). Find TP2. If TP2 must stay below 4.3 V, what is the largest AVDD?", "3.59 V; 5.99 V", "TP2 = 5 × 150/209 = 3.59 V\nAVDD_max = 4.3 × 209/150 = 5.99 V"],
+  [5, "At 10 Hz the high-pass output reads larger than theory, and the phase falls instead of approaching 90°. Why?", "The signal is too small to measure well", "The output is only tens of mV, near the scope’s noise and resolution. Magnitude and phase readings are unreliable there."],
+  [5, "How do you measure V_pp three ways on the scope? Which is the least precise?", "Boxes, cursors, auto; boxes are least precise", "Boxes × V/div (least precise), cursors on the peaks, and the automatic V_pp measurement (most convenient)."],
+  // Lab 6
+  [6, "Inverting amplifier: R_in = 2.2 kΩ, R_f = 22 kΩ. Find the gain and the output for a 0.3 V peak input.", "−10; −3 V peak (inverted)", "A_v = −22k/2.2k = −10\nV_out = −10 × 0.3 = −3 V peak (upside down)"],
+  [6, "Same amplifier on ±12 V supplies with a 2 V peak input. What happens?", "It clips", "Ideal output = −20 V peak, beyond the rails. A 741 swings to about ±10 to ±11 V on ±12 V supplies, so the peaks are flattened."],
+  [6, "Non-inverting: R_f = 47 kΩ, R_g = 4.7 kΩ. Find the gain.", "11", "A_v = 1 + 47k/4.7k = 1 + 10 = 11"],
+  [6, "Design a non-inverting amplifier with a gain of 21, using R_g = 1 kΩ.", "R_f = 20 kΩ", "21 = 1 + R_f/1k → R_f = 20 kΩ"],
+  [6, "Current sense: R_sense = 0.1 Ω, amplifier gain 20, I = 0.5 A. Find V_out and the transimpedance.", "1 V; 2 Ω", "V_sense = 0.5 × 0.1 = 0.05 V\nV_out = 0.05 × 20 = 1 V\nTransimpedance = V_out/I = 0.1 × 20 = 2 Ω"],
+  [6, "State the two golden rules of an ideal op amp with negative feedback.", "V+ = V−; no input current", "1. The output adjusts so the two inputs are at the same voltage.\n2. No current flows into either input."],
+  [6, "A cursor reading on a ±15 V op amp shows a 39 V output swing. Is this possible?", "No", "The output can’t go outside the rails, so the maximum span is 30 V (really about 26 V for a 741). 39 V means the cursors or the display setting are wrong."],
+  [6, "R_f = 100 kΩ with C = 10 nF in parallel in the feedback path. Find the corner frequency.", "≈ 159 Hz", "f_c = 1/(2π · 10⁵ · 10⁻⁸) = 1/(2π·10⁻³) = 159 Hz"],
+];
+
+const LABS = ["All", "Lab 1", "Lab 2", "Lab 3", "Lab 4", "Lab 5", "Lab 6"];
+let lab = 0, onlyAgain = false, marks = {};
+try { marks = JSON.parse(localStorage.getItem("ese123-midterm-marks") || "{}"); } catch (e) { marks = {}; }
+const save = () => { try { localStorage.setItem("ese123-midterm-marks", JSON.stringify(marks)); } catch (e) {} };
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+
+function render() {
+  const ol = document.getElementById("qs");
+  ol.innerHTML = "";
+  Q.forEach(([l, q, a, w], i) => {
+    if (lab && l !== lab) return;
+    if (onlyAgain && marks[i] !== "again") return;
+    const li = document.createElement("li");
+    if (marks[i]) li.className = marks[i];
+    li.innerHTML = `<div class="qh"><span class="qn">Q${i + 1}</span><span class="tag">Lab ${l}</span></div>
+      <p>${esc(q)}</p>
+      <details><summary>Show answer</summary><div class="ans"><p><b>${esc(a)}</b></p><div class="eq">${esc(w)}</div></div></details>
+      <div class="mark"><button data-m="done">Got it</button><button data-m="again">Review again</button></div>`;
+    li.querySelectorAll("button").forEach(b => {
+      if (marks[i] === b.dataset.m) b.classList.add("on");
+      b.onclick = () => { marks[i] = marks[i] === b.dataset.m ? undefined : b.dataset.m; save(); render(); };
+    });
+    ol.appendChild(li);
+  });
+  if (!ol.children.length) ol.innerHTML = '<li><p class="small">Nothing to show here.</p></li>';
+  const done = Object.values(marks).filter(m => m === "done").length;
+  const again = Object.values(marks).filter(m => m === "again").length;
+  document.getElementById("score").textContent = `Got it: ${done} / ${Q.length} · Review again: ${again}`;
+}
+
+const f = document.getElementById("filters");
+LABS.forEach((name, i) => {
+  const b = document.createElement("button");
+  b.textContent = name;
+  b.onclick = () => { lab = i; f.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); render(); };
+  if (i === 0) b.classList.add("on");
+  f.appendChild(b);
+});
+document.getElementById("onlyAgain").onclick = e => { onlyAgain = !onlyAgain; e.target.classList.toggle("on", onlyAgain); render(); };
+document.getElementById("reset").onclick = () => { marks = {}; save(); render(); };
+render();
+</script>
+</body>
+</html>

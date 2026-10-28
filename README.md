@@ -14,6 +14,10 @@ Interactive, animated walkthroughs of every ESE 123 lab (Stony Brook University)
 | 6 | Operational Amplifiers | https://cad281.github.io/ese123-lab6/ | [cad281/ese123-lab6](https://github.com/cad281/ese123-lab6) |
 | 7 | Assembly Language & Buzzer | https://cad281.github.io/ese123-lab7/ | [cad281/ese123-lab7](https://github.com/cad281/ese123-lab7) |
 
+## Midterm review
+
+Labs 1–6 in plain words, a one-page formula sheet and 46 practice questions with worked answers: https://cad281.github.io/ese123-fall2026/midterm/
+
 ## My lab reports (Jenny Chen)
 
 | Lab | Report | File |
