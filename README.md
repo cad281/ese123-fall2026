@@ -18,6 +18,8 @@ Interactive, animated walkthroughs of every ESE 123 lab (Stony Brook University)
 
 Labs 1–6 in plain words, a one-page formula sheet and 46 practice questions with worked answers: https://cad281.github.io/ese123-fall2026/midterm/
 
+Extra quick review: the plain-English practice set with 16 lessons and 48 drill questions lives here: https://cad281.github.io/ese123-fall2026/midterm/plain-english/
+
 ## My lab reports (Jenny Chen)
 
 | Lab | Report | File |

@@ -1,0 +1,1349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Electrical Fundamentals in Plain English | ESE 123</title>
+<style>
+:root{--ink:#172b3a;--accent:#145ca0;--line:#d8e2eb}*{box-sizing:border-box}body{margin:0;background:#f1f5f8;color:var(--ink);font:18px/1.65 system-ui,sans-serif}main{max-width:960px;margin:auto;padding:24px}header{padding:32px 0}h1{font-size:clamp(2rem,6vw,3.3rem);line-height:1.13}h2{line-height:1.25}a{color:var(--accent)}nav{display:flex;flex-wrap:wrap;gap:8px}nav a{padding:5px 10px;border:1px solid var(--line);border-radius:8px;background:white;font-size:.85rem}section{background:white;border:1px solid var(--line);border-radius:16px;padding:24px;margin:24px 0;scroll-margin-top:20px}.tag{color:#536a7e;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase}.formula,.example{padding:16px;border-radius:8px;background:#edf5fc;margin:16px 0}.formula{font-family:ui-monospace,monospace;overflow-wrap:anywhere}.example{background:#edf7f0}.mistake{border-left:4px solid #c27414;padding:8px 16px;background:#fff7e9}fieldset{border:1px solid var(--line);border-radius:10px;margin:20px 0;padding:16px;min-width:0}legend{font-weight:650;padding:0 6px}label{display:block;padding:8px;border-radius:6px;cursor:pointer}label:hover{background:#f1f5f8}input{margin-right:10px}button{font:inherit;border:1px solid #145ca0;border-radius:8px;padding:8px 15px;background:#145ca0;color:white;cursor:pointer;margin:6px 6px 6px 0}button.secondary{color:#145ca0;background:white}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #c27414;outline-offset:3px}.feedback{padding:12px;background:#edf5fc;border-radius:8px}.feedback:empty{display:none}.correct{border-color:#21763a}.incorrect{border-color:#b94722}summary{cursor:pointer;color:var(--accent);font-weight:650}svg{max-width:100%;height:auto}svg text{font:15px system-ui;fill:#172b3a}.table{overflow:auto}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--line);padding:8px;text-align:left}footer{padding:20px 0;color:#536a7e}#score{font-weight:700} @media(max-width:540px){main{padding:12px}section{padding:16px}body{font-size:17px}}@media print{nav,button,.tools{display:none}body{background:white;font-size:11pt}main{max-width:none}section{break-inside:avoid;border-radius:0}details{display:block}fieldset{break-inside:avoid}.feedback{display:block!important}}
+
+:root{--ink:#192e3c;--accent:#1b5d76;--line:#d6e0e4;--paper:#fff;scroll-behavior:smooth}body{background:#f3f5f3;font:18px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1180px;padding:32px 30px 70px;display:grid;grid-template-columns:245px minmax(0,1fr);gap:0 36px}header{grid-column:1/-1;padding:26px 0 32px}header>p{max-width:760px}h1{font-family:Georgia,serif;font-weight:500;letter-spacing:-.045em;font-size:clamp(2.6rem,6vw,4.5rem);margin:20px 0;line-height:1.06}h2{font-size:1.65rem;letter-spacing:-.025em;margin:8px 0 22px}h3{font-size:1.1rem;margin-top:30px}.tag{color:#326b75;font-weight:700;font-size:.73rem;letter-spacing:.13em}nav{grid-column:1;grid-row:2 / span 20;display:flex;flex-direction:column;gap:4px;align-self:start;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;padding:16px;background:#e9efec;border-radius:12px}nav:before{content:'YOUR STUDY MAP';font-size:.7rem;letter-spacing:.12em;font-weight:700;padding:5px 8px 12px;color:#536a67}nav a{border:0;background:transparent;text-decoration:none;font-size:.79rem;line-height:1.5;padding:8px 10px;border-radius:6px}nav a:hover{background:white}section{grid-column:2;margin:0 0 24px;padding:32px;border-radius:12px;box-shadow:0 3px 15px #193a3a04;scroll-margin-top:24px}section>p{max-width:67ch}.formula{background:#edf4f6;border-left:3px solid #387d93;padding:20px;font-size:.96rem;line-height:1.9}.formula-line{display:block;margin:5px 0}.example{background:#f0f6ef;padding:20px}.example>strong{font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;color:#386448}.example p{margin-bottom:0}.mistake{font-size:.92rem;border-color:#b57a2c;background:#fcf6e9}fieldset{background:#fbfcfc;border:1px solid var(--line);border-radius:10px;padding:20px;margin:28px 0}legend{font-size:1rem;line-height:1.5;max-width:100%;padding:0 8px}label{display:flex;align-items:baseline;gap:10px;font-size:.96rem;padding:11px 12px;margin:5px 0;border:1px solid transparent}label:has(input:checked){background:#e8f0f4;border-color:#93b7c7}input[type=radio]{flex-shrink:0;accent-color:var(--accent);margin:0}button{font-size:.87rem;padding:10px 15px;background:var(--accent);border-color:var(--accent)}button.secondary{color:var(--accent)}details{margin-top:12px;font-size:.94rem}details[open]{background:#eef4f5;padding:14px;border-radius:8px}summary{font-size:.86rem}.feedback{font-size:.92rem}.correct{border:2px solid #398052}.incorrect{border:2px solid #b86640}.back{font-size:.78rem;text-decoration:none}.tools{padding:20px 24px;background:white;border:1px solid var(--line);border-radius:12px;margin-top:26px}.tools p{font-size:.8rem;color:#536a67;margin:8px 0}#score{color:var(--ink);font-size:.95rem}progress{display:block;width:100%;height:8px;margin:12px 0;accent-color:var(--accent)}.review-controls{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}.review-controls button[aria-pressed=true]{background:var(--accent);color:white}#empty-review{grid-column:2;background:#fff;padding:24px;border-radius:10px}footer{grid-column:2;font-size:.82rem}a{ text-underline-offset:3px}[hidden]{display:none!important}.skip{position:absolute;left:16px;top:-100px}.skip:focus{top:12px;background:white;padding:12px;z-index:10}
+@media(max-width:850px){main{display:block;max-width:780px;padding:20px}nav{position:static;max-height:none;display:grid;grid-template-columns:1fr 1fr;margin:0 0 24px}nav:before{grid-column:1/-1}section{padding:26px}}@media(max-width:540px){main{padding:14px}nav{display:block}nav a{display:block}section{padding:20px}fieldset{padding:14px}.tools{padding:16px}h1{font-size:2.8rem}}@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}}@media print{main{display:block;padding:0}header{padding:0}h1{font-size:28pt}section{box-shadow:none;padding:12pt;margin:12pt 0;break-inside:auto}nav,.tools,.back,.skip,#empty-review{display:none!important}section[hidden],fieldset[hidden]{display:block!important}fieldset{break-inside:avoid}body{font-size:11pt;background:white}details{display:block}details>p{display:block!important}footer{display:block}.formula,.example{padding:10pt}}
+</style>
+</head>
+<body>
+<a class="skip" href="#lesson-1">Skip to lessons</a>
+<main>
+<header>
+<a href="https://cad281.github.io/ese123-fall2026/">← Lab guide home</a> · <a href="https://cad281.github.io/ese123-fall2026/midterm/">Existing midterm review</a>
+<p class="tag">ESE 123 · Midterm practice · Reusable lab foundations</p>
+<h1>Electrical fundamentals,<br>in plain English.</h1>
+<p>Understand the idea. Follow one worked example. Then test yourself.</p>
+<p>16 short lessons · 48 multiple-choice questions · worked explanations. Prepared from the October 31–November 1 study topics; suitable for reuse in Spring 2027 lab teaching.</p>
+<p>This is a practice supplement, not an official exam or a guarantee of exam coverage. Check your course handouts for the assessed scope.</p>
+<div class="tools">
+<button onclick="window.print()">Print / Save as PDF</button>
+<button class="secondary" id="reset">Reset all answers</button>
+<p id="score" aria-live="polite">
+</p>
+<progress id="completion" max="48" value="0" aria-label="Questions attempted">
+</progress>
+<div class="review-controls" role="group" aria-label="Study view">
+<button class="secondary" data-mode="all" aria-pressed="true">All lessons</button>
+<button class="secondary" data-mode="wrong" aria-pressed="false">Review mistakes</button>
+<button class="secondary" data-mode="formulas" aria-pressed="false">Formula sheet</button>
+</div>
+<p>Answers and progress stay in this browser on this device; they do not sync between iPads.</p>
+</div>
+</header>
+<nav aria-label="Lesson navigation">
+<a href="#lesson-1">1. Units, charge and current</a>
+<a href="#lesson-2">2. Ohm’s law and power</a>
+<a href="#lesson-3">3. Series, parallel and circuit nodes</a>
+<a href="#lesson-4">4. KCL, KVL and negative readings</a>
+<a href="#lesson-5">5. Voltage dividers and loaded dividers</a>
+<a href="#lesson-6">6. Current division</a>
+<a href="#lesson-7">7. Resistor power ratings and worst cases</a>
+<a href="#lesson-8">8. Meters, open circuits and short circuits</a>
+<a href="#lesson-9">9. Power supply: CV and CC</a>
+<a href="#lesson-10">10. Oscilloscope divisions, cycles and frequency</a>
+<a href="#lesson-11">11. Trigger: a repeatable starting condition</a>
+<a href="#lesson-12">12. Peak, offset and RMS</a>
+<a href="#lesson-13">13. Rectangular pulses and DC offset</a>
+<a href="#lesson-14">14. Function generator: the internal 50 Ω</a>
+<a href="#lesson-15">15. Capacitor charge, current and steady DC</a>
+<a href="#lesson-16">16. RC time constant and capacitor energy</a>
+<a href="#formula-sheet">↗ Quick formula check</a>
+</nav>
+<section>
+<h2>Read the circuit, not the drawing shape</h2>
+<svg viewBox="0 0 720 230" role="img" aria-label="Series: A to resistor one to resistor two to B on one path. Parallel: two separate resistor branches both connect A to B.">
+<g fill="none" stroke="#145ca0" stroke-width="3">
+<path d="M25 90H70V75H145V105H70V90 M145 90H185V75H260V105H185V90 M260 90H300"/>
+<path d="M400 120H430V60H470V45H550V75H470V60 M550 60H600V180H550V165H470V195H550V180 M470 180H430V120 M600 120H645"/>
+</g>
+<text x="25" y="45">Series: one path</text>
+<text x="83" y="65">R₁</text>
+<text x="202" y="65">R₂</text>
+<text x="25" y="120">A</text>
+<text x="285" y="120">B</text>
+<text x="400" y="25">Parallel: same two nodes</text>
+<text x="385" y="125">A</text>
+<text x="650" y="125">B</text>
+<text x="495" y="35">R₁</text>
+<text x="495" y="220">R₂</text>
+<text x="25" y="175">Same current through both.</text>
+<text x="25" y="200">Voltage drops add.</text>
+</svg>
+<p>At a wire crossing, a junction dot normally indicates a connection. If the drawing is unclear, identify the actual connected nodes before calculating.</p>
+</section>
+<section id="lesson-1">
+<p class="tag">Lesson 1</p>
+<h2>Units, charge and current</h2>
+<p>Current is how quickly charge moves, like water flow per second. Voltage is energy per unit charge; resistance opposes current. Conductance describes how easily current flows. Convert units before calculating.</p>
+<div class="formula">
+<span class="formula-line">I = Δq/Δt; V = E/q; G = 1/R</span>
+<span class="formula-line">k = 10³, m = 10⁻³, μ = 10⁻⁶, n = 10⁻⁹.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>A charge of 10 C passes in 5 s: I = 10/5 = 2 A. A 2 kΩ resistor has G = 1/2000 = 0.0005 S = 0.5 mS.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> Milli and micro are different. Conductance is measured in siemens (S), not ohms.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="0">
+<legend>1. 500 μs equals how many seconds?</legend>
+<label>
+<input type="radio" name="q0" value="0">A. 0.5 s</label>
+<label>
+<input type="radio" name="q0" value="1">B. 0.0005 s</label>
+<label>
+<input type="radio" name="q0" value="2">C. 500 s</label>
+<label>
+<input type="radio" name="q0" value="3">D. 0.005 s</label>
+<button type="button" data-check="0">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 0.0005 s</strong> 500 × 10⁻⁶ s = 0.0005 s.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="1">
+<legend>2. 6 C passes in 3 s. Find current.</legend>
+<label>
+<input type="radio" name="q1" value="0">A. 18 A</label>
+<label>
+<input type="radio" name="q1" value="1">B. 0.5 A</label>
+<label>
+<input type="radio" name="q1" value="2">C. 2 A</label>
+<label>
+<input type="radio" name="q1" value="3">D. 3 A</label>
+<button type="button" data-check="1">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 2 A</strong> I = 6/3 = 2 A.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="2">
+<legend>3. What is the conductance of 100 Ω?</legend>
+<label>
+<input type="radio" name="q2" value="0">A. 100 S</label>
+<label>
+<input type="radio" name="q2" value="1">B. 0.01 S</label>
+<label>
+<input type="radio" name="q2" value="2">C. 10 S</label>
+<label>
+<input type="radio" name="q2" value="3">D. 0.001 S</label>
+<button type="button" data-check="2">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 0.01 S</strong> G = 1/100 = 0.01 S.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-2">
+<p class="tag">Lesson 2</p>
+<h2>Ohm’s law and power</h2>
+<p>A resistor turns electrical energy into heat. More voltage pushes more current through the same resistor. Power is the rate of energy use, not the total energy stored.</p>
+<div class="formula">
+<span class="formula-line">V = IR; P = VI = I²R = V²/R; E = Pt for constant power.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>12 V across 3 kΩ gives I = 12/3000 = 4 mA. P = 12 × 0.004 = 0.048 W = 48 mW.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> Double the voltage across the same resistor and power becomes four times larger.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="3">
+<legend>4. 5 V is across 1 kΩ. Find current.</legend>
+<label>
+<input type="radio" name="q3" value="0">A. 5 A</label>
+<label>
+<input type="radio" name="q3" value="1">B. 0.2 mA</label>
+<label>
+<input type="radio" name="q3" value="2">C. 5 mA</label>
+<label>
+<input type="radio" name="q3" value="3">D. 500 mA</label>
+<button type="button" data-check="3">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 5 mA</strong> I = 5/1000 = 0.005 A = 5 mA.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="4">
+<legend>5. 10 V × 2 mA gives what power?</legend>
+<label>
+<input type="radio" name="q4" value="0">A. 20 W</label>
+<label>
+<input type="radio" name="q4" value="1">B. 20 mW</label>
+<label>
+<input type="radio" name="q4" value="2">C. 5 W</label>
+<label>
+<input type="radio" name="q4" value="3">D. 5 mW</label>
+<button type="button" data-check="4">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 20 mW</strong> P = 10 × 0.002 = 0.020 W = 20 mW.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="5">
+<legend>6. Voltage doubles across a fixed resistor. Power becomes…</legend>
+<label>
+<input type="radio" name="q5" value="0">A. 2 times</label>
+<label>
+<input type="radio" name="q5" value="1">B. 4 times</label>
+<label>
+<input type="radio" name="q5" value="2">C. half</label>
+<label>
+<input type="radio" name="q5" value="3">D. unchanged</label>
+<button type="button" data-check="5">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 4 times</strong> P = V²/R, so the ratio is 2² = 4.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-3">
+<p class="tag">Lesson 3</p>
+<h2>Series, parallel and circuit nodes</h2>
+<p>Series means one path with the same current through the components and no branch between them. Parallel components connect to the same two nodes, so they share voltage. A node is a set of points joined by ideal wire; its drawn shape does not matter.</p>
+<div class="formula">
+<span class="formula-line">Series: Rtotal = R₁ + R₂</span>
+<span class="formula-line">Parallel: 1/Rtotal = 1/R₁ + 1/R₂ + …</span>
+<span class="formula-line">For two: Rtotal = R₁R₂/(R₁+R₂).</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>A 1 kΩ resistor in series with (6 kΩ parallel 3 kΩ): the parallel part is 2 kΩ, total is 3 kΩ. At 6 V, total current is 2 mA and the parallel part has 4 V.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> Do not classify components by whether they look side by side. Trace the nodes.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="6">
+<legend>7. 2 kΩ and 3 kΩ are in parallel. Find equivalent resistance.</legend>
+<label>
+<input type="radio" name="q6" value="0">A. 5 kΩ</label>
+<label>
+<input type="radio" name="q6" value="1">B. 1.2 kΩ</label>
+<label>
+<input type="radio" name="q6" value="2">C. 6 kΩ</label>
+<label>
+<input type="radio" name="q6" value="3">D. 2.5 kΩ</label>
+<button type="button" data-check="6">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 1.2 kΩ</strong> R = (2×3)/(2+3) kΩ = 1.2 kΩ, below either resistor.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="7">
+<legend>8. Two resistors share both end nodes. What must be equal?</legend>
+<label>
+<input type="radio" name="q7" value="0">A. Current</label>
+<label>
+<input type="radio" name="q7" value="1">B. Resistance</label>
+<label>
+<input type="radio" name="q7" value="2">C. Voltage</label>
+<label>
+<input type="radio" name="q7" value="3">D. Power</label>
+<button type="button" data-check="7">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. Voltage</strong> Parallel branches have the same voltage because both endpoints are shared.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="8">
+<legend>9. A 1 kΩ resistor is in series with (2 kΩ parallel 2 kΩ). Total?</legend>
+<label>
+<input type="radio" name="q8" value="0">A. 5 kΩ</label>
+<label>
+<input type="radio" name="q8" value="1">B. 3 kΩ</label>
+<label>
+<input type="radio" name="q8" value="2">C. 0.5 kΩ</label>
+<label>
+<input type="radio" name="q8" value="3">D. 2 kΩ</label>
+<button type="button" data-check="8">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>D. 2 kΩ</strong> 2 kΩ parallel 2 kΩ = 1 kΩ; then add 1 kΩ to get 2 kΩ.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-4">
+<p class="tag">Lesson 4</p>
+<h2>KCL, KVL and negative readings</h2>
+<p>At a junction, charge does not pile up in steady operation: current in equals current out (KCL). Around a closed loop, voltage rises balance voltage drops (KVL). A negative current means the real direction is opposite your chosen arrow.</p>
+<div class="formula">
+<span class="formula-line">KCL: ΣIin = ΣIout</span>
+<span class="formula-line">KVL: signed voltage changes around a loop sum to zero.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>7 mA enters a node; 2 mA leaves through one branch. The other outgoing current is 7 − 2 = 5 mA. A 9 V source with a 4 V drop leaves 5 V for the other series drop.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> A negative number is often a direction or polarity result, not a broken circuit.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="9">
+<legend>10. 8 mA enters; 3 mA leaves one branch. What leaves the other?</legend>
+<label>
+<input type="radio" name="q9" value="0">A. 11 mA</label>
+<label>
+<input type="radio" name="q9" value="1">B. 5 mA</label>
+<label>
+<input type="radio" name="q9" value="2">C. 24 mA</label>
+<label>
+<input type="radio" name="q9" value="3">D. −8 mA</label>
+<button type="button" data-check="9">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 5 mA</strong> 8 = 3 + I, so I = 5 mA.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="10">
+<legend>11. A 12 V source supplies two series drops: 5 V and what?</legend>
+<label>
+<input type="radio" name="q10" value="0">A. 17 V</label>
+<label>
+<input type="radio" name="q10" value="1">B. 60 V</label>
+<label>
+<input type="radio" name="q10" value="2">C. 7 V</label>
+<label>
+<input type="radio" name="q10" value="3">D. 2.4 V</label>
+<button type="button" data-check="10">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 7 V</strong> 12 − 5 − V = 0, giving V = 7 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="11">
+<legend>12. A current calculation gives −2 mA for a right-pointing reference arrow. Meaning?</legend>
+<label>
+<input type="radio" name="q11" value="0">A. 2 mA flows left</label>
+<label>
+<input type="radio" name="q11" value="1">B. No current flows</label>
+<label>
+<input type="radio" name="q11" value="2">C. The resistor is negative</label>
+<label>
+<input type="radio" name="q11" value="3">D. 2 mA flows right</label>
+<button type="button" data-check="11">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>A. 2 mA flows left</strong> The minus sign reverses the reference direction: 2 mA flows left.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-5">
+<p class="tag">Lesson 5</p>
+<h2>Voltage dividers and loaded dividers</h2>
+<p>In a series divider, the larger resistor gets the larger voltage drop. Output across the bottom resistor depends on its share of total resistance. Connecting a load across the bottom creates a parallel path and usually lowers that output.</p>
+<div class="formula">
+<span class="formula-line">Unloaded: Vout = Vin R₂/(R₁+R₂)</span>
+<span class="formula-line">Loaded: replace R₂ by R₂ ∥ RL, then use the same formula.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>12 V feeds top 8 kΩ and bottom 4 kΩ. Unloaded output = 12×4/12 = 4 V. Add a 4 kΩ load across the bottom: bottom equivalent = 2 kΩ, output = 12×2/(8+2) = 2.4 V.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> The load goes in parallel with the bottom resistor; do not add it in series.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="12">
+<legend>13. 10 V feeds two equal series resistors; output is across the bottom. No load. Output?</legend>
+<label>
+<input type="radio" name="q12" value="0">A. 10 V</label>
+<label>
+<input type="radio" name="q12" value="1">B. 0 V</label>
+<label>
+<input type="radio" name="q12" value="2">C. 5 V</label>
+<label>
+<input type="radio" name="q12" value="3">D. 20 V</label>
+<button type="button" data-check="12">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 5 V</strong> Equal resistors divide the supply equally: 10/2 = 5 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="13">
+<legend>14. 12 V feeds top 4 kΩ and bottom 8 kΩ, no load. Output across bottom?</legend>
+<label>
+<input type="radio" name="q13" value="0">A. 4 V</label>
+<label>
+<input type="radio" name="q13" value="1">B. 8 V</label>
+<label>
+<input type="radio" name="q13" value="2">C. 6 V</label>
+<label>
+<input type="radio" name="q13" value="3">D. 12 V</label>
+<button type="button" data-check="13">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 8 V</strong> Vout = 12×8/(4+8) = 8 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="14">
+<legend>15. 9 V feeds top 3 kΩ, bottom 6 kΩ, and a 6 kΩ load across bottom. Output?</legend>
+<label>
+<input type="radio" name="q14" value="0">A. 6 V</label>
+<label>
+<input type="radio" name="q14" value="1">B. 3 V</label>
+<label>
+<input type="radio" name="q14" value="2">C. 9 V</label>
+<label>
+<input type="radio" name="q14" value="3">D. 4.5 V</label>
+<button type="button" data-check="14">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>D. 4.5 V</strong> Bottom equivalent = 6∥6 = 3 kΩ; Vout = 9×3/(3+3) = 4.5 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-6">
+<p class="tag">Lesson 6</p>
+<h2>Current division</h2>
+<p>Parallel branches share voltage. At that same voltage, a smaller resistance carries more current. Finding the common voltage first and using I = V/R always works.</p>
+<div class="formula">
+<span class="formula-line">For two branches: I₁ = Itotal R₂/(R₁+R₂)</span>
+<span class="formula-line">The other resistor appears because current divides inversely with resistance.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>3 Ω, 6 Ω and 9 Ω share 18 V. Currents are 6 A, 3 A and 2 A, adding to 11 A. Req = 18/11 ≈ 1.636 Ω.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> Do not divide total current equally unless branch resistances are equal.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="15">
+<legend>16. 2 Ω and 4 Ω share a total of 9 A. Current through 2 Ω?</legend>
+<label>
+<input type="radio" name="q15" value="0">A. 3 A</label>
+<label>
+<input type="radio" name="q15" value="1">B. 4.5 A</label>
+<label>
+<input type="radio" name="q15" value="2">C. 6 A</label>
+<label>
+<input type="radio" name="q15" value="3">D. 9 A</label>
+<button type="button" data-check="15">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 6 A</strong> I₂Ω = 9×4/(2+4) = 6 A; the 4 Ω branch carries 3 A.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="16">
+<legend>17. 12 V is across parallel 2 Ω, 4 Ω, 6 Ω. Total current?</legend>
+<label>
+<input type="radio" name="q16" value="0">A. 6 A</label>
+<label>
+<input type="radio" name="q16" value="1">B. 11 A</label>
+<label>
+<input type="radio" name="q16" value="2">C. 3 A</label>
+<label>
+<input type="radio" name="q16" value="3">D. 2 A</label>
+<button type="button" data-check="16">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 11 A</strong> Branch currents are 6 A, 3 A, 2 A; sum = 11 A.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="17">
+<legend>18. Same voltage across two branches: one resistance is half the other. Its current is…</legend>
+<label>
+<input type="radio" name="q17" value="0">A. Half</label>
+<label>
+<input type="radio" name="q17" value="1">B. Equal</label>
+<label>
+<input type="radio" name="q17" value="2">C. Four times</label>
+<label>
+<input type="radio" name="q17" value="3">D. Twice</label>
+<button type="button" data-check="17">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>D. Twice</strong> I = V/R: halving resistance doubles current.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-7">
+<p class="tag">Lesson 7</p>
+<h2>Resistor power ratings and worst cases</h2>
+<p>A ¼ W rating is a limit on heat dissipation under specified conditions. In series, current is shared, so a larger resistor with the same power rating reaches its limit first. In parallel, voltage is shared, so the smaller resistor reaches the same rating first.</p>
+<div class="formula">
+<span class="formula-line">Ilimit = √(Prated/R); Vlimit = √(Prated R)</span>
+<span class="formula-line">In series use the smallest current limit</span>
+<span class="formula-line">Rmin = V²/Prated.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>100 Ω and 200 Ω in series, each rated 0.5 W: limits are 0.0707 A and 0.0500 A. Use 0.0500 A. Maximum total voltage = 0.0500×300 = 15 V. Powers are 0.25 W and 0.50 W.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> Check every resistor, not just total power. Calculated limits are ideal rating boundaries; real designs allow margin and temperature derating.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="18">
+<legend>19. 100 Ω rated 0.25 W: voltage at the rating boundary?</legend>
+<label>
+<input type="radio" name="q18" value="0">A. 2.5 V</label>
+<label>
+<input type="radio" name="q18" value="1">B. 5 V</label>
+<label>
+<input type="radio" name="q18" value="2">C. 25 V</label>
+<label>
+<input type="radio" name="q18" value="3">D. 50 V</label>
+<button type="button" data-check="18">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 5 V</strong> V = √(0.25×100) = 5 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="19">
+<legend>20. 150 Ω and 300 Ω in series, each 0.5 W: maximum total voltage (two decimals)?</legend>
+<label>
+<input type="radio" name="q19" value="0">A. 12.25 V</label>
+<label>
+<input type="radio" name="q19" value="1">B. 9.19 V</label>
+<label>
+<input type="radio" name="q19" value="2">C. 18.37 V</label>
+<label>
+<input type="radio" name="q19" value="3">D. 22.50 V</label>
+<button type="button" data-check="19">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 18.37 V</strong> The 300 Ω limit is √(0.5/300) A. Multiply by 450 Ω: 18.37 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="20">
+<legend>21. 12 V across a resistor: minimum resistance to keep power at or below 0.25 W?</legend>
+<label>
+<input type="radio" name="q20" value="0">A. 48 Ω</label>
+<label>
+<input type="radio" name="q20" value="1">B. 576 Ω</label>
+<label>
+<input type="radio" name="q20" value="2">C. 144 Ω</label>
+<label>
+<input type="radio" name="q20" value="3">D. 3 Ω</label>
+<button type="button" data-check="20">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 576 Ω</strong> R ≥ V²/P = 144/0.25 = 576 Ω.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-8">
+<p class="tag">Lesson 8</p>
+<h2>Meters, open circuits and short circuits</h2>
+<p>A voltmeter compares two points, so connect it in parallel. An ammeter measures flow, so insert it in series. An open circuit is a broken path: no current through the opening, but voltage may remain. An ideal short joins two points with zero voltage difference, but can carry current.</p>
+<div class="formula">
+<span class="formula-line">Ideal voltmeter: infinite input resistance</span>
+<span class="formula-line">Ideal ammeter: zero resistance</span>
+<span class="formula-line">Open: I = 0</span>
+<span class="formula-line">Ideal short: V = 0.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>An unconnected 1.5 V battery has essentially no external current, yet about 1.5 V between its terminals. A 0.20 Ω resistor plus two 0.10 Ω leads reads 0.40 Ω in a simple two-wire measurement. Four-wire sensing largely excludes lead voltage drops.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> Power off and discharge capacitors before resistance measurement. Never connect an ammeter directly across a supply. A short is not the same as closing a normal loaded circuit.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="21">
+<legend>22. An open switch can have 5 V across it. Ideal current through the opening?</legend>
+<label>
+<input type="radio" name="q21" value="0">A. 5 A</label>
+<label>
+<input type="radio" name="q21" value="1">B. 1 A</label>
+<label>
+<input type="radio" name="q21" value="2">C. 0 A</label>
+<label>
+<input type="radio" name="q21" value="3">D. Unknown without R</label>
+<button type="button" data-check="21">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 0 A</strong> An ideal open has no conducting path, so I = 0 even when voltage is nonzero.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="22">
+<legend>23. Why use four-wire sensing for a very small resistance?</legend>
+<label>
+<input type="radio" name="q22" value="0">A. To include lead resistance</label>
+<label>
+<input type="radio" name="q22" value="1">B. To reduce lead-resistance error</label>
+<label>
+<input type="radio" name="q22" value="2">C. To increase test voltage without limit</label>
+<label>
+<input type="radio" name="q22" value="3">D. To turn off current</label>
+<button type="button" data-check="22">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. To reduce lead-resistance error</strong> Separate voltage-sense leads draw almost no current, largely excluding current-lead voltage drops.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="23">
+<legend>24. 1 kΩ ±5% allows what range?</legend>
+<label>
+<input type="radio" name="q23" value="0">A. 950–1050 Ω</label>
+<label>
+<input type="radio" name="q23" value="1">B. 995–1005 Ω</label>
+<label>
+<input type="radio" name="q23" value="2">C. 500–1500 Ω</label>
+<label>
+<input type="radio" name="q23" value="3">D. Exactly 1050 Ω</label>
+<button type="button" data-check="23">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>A. 950–1050 Ω</strong> 5% of 1000 Ω is 50 Ω, so the allowed range is 950 to 1050 Ω.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-9">
+<p class="tag">Lesson 9</p>
+<h2>Power supply: CV and CC</h2>
+<p>A current limit is a ceiling, not a promise to force that current through every load. In CV mode the supply holds the requested voltage. If that would demand too much current, CC mode lowers voltage to keep current at the limit.</p>
+<div class="formula">
+<span class="formula-line">Ineeded = Vset/R</span>
+<span class="formula-line">If Ineeded &lt; Ilimit: CV</span>
+<span class="formula-line">If Ineeded > Ilimit: CC, I = Ilimit and V = Ilimit R.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>Set 8 V, current limit 2 A. With 3 Ω, requested current is 8/3 = 2.67 A, so CC gives 2 A and 6 V. With 10 Ω, CV gives 8 V and 0.8 A.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> A CC indicator can explain why measured voltage is lower than the set voltage.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="24">
+<legend>25. Set 6 V, limit 1 A, load 2 Ω. Actual voltage and current?</legend>
+<label>
+<input type="radio" name="q24" value="0">A. 6 V, 3 A</label>
+<label>
+<input type="radio" name="q24" value="1">B. 2 V, 1 A</label>
+<label>
+<input type="radio" name="q24" value="2">C. 6 V, 1 A</label>
+<label>
+<input type="radio" name="q24" value="3">D. 1 V, 2 A</label>
+<button type="button" data-check="24">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 2 V, 1 A</strong> At 6 V the demand is 3 A, above limit; CC gives 1 A and V=1×2=2 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="25">
+<legend>26. Set 6 V, limit 1 A, load 12 Ω. Actual mode?</legend>
+<label>
+<input type="radio" name="q25" value="0">A. CC at 1 A</label>
+<label>
+<input type="radio" name="q25" value="1">B. CV at 0.5 A</label>
+<label>
+<input type="radio" name="q25" value="2">C. CV at 1 A</label>
+<label>
+<input type="radio" name="q25" value="3">D. Output must be zero</label>
+<button type="button" data-check="25">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. CV at 0.5 A</strong> Demand is 6/12=0.5 A below limit, so CV holds 6 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="26">
+<legend>27. A 2 A current limit means…</legend>
+<label>
+<input type="radio" name="q26" value="0">A. Every load gets 2 A</label>
+<label>
+<input type="radio" name="q26" value="1">B. The voltage is always 2 V</label>
+<label>
+<input type="radio" name="q26" value="2">C. Current is capped near 2 A</label>
+<label>
+<input type="radio" name="q26" value="3">D. Resistance becomes 2 Ω</label>
+<button type="button" data-check="26">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. Current is capped near 2 A</strong> The limit caps current; a higher-resistance load can draw much less.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-10">
+<p class="tag">Lesson 10</p>
+<h2>Oscilloscope divisions, cycles and frequency</h2>
+<p>A division is one large grid box. Vertical boxes measure voltage; horizontal boxes measure time. A cycle is one complete repeat: peak to next peak, not peak to the next valley. Period is seconds per cycle; frequency is cycles per second.</p>
+<div class="formula">
+<span class="formula-line">Vpp = vertical peak-to-valley divisions × V/div</span>
+<span class="formula-line">T = horizontal divisions per cycle × s/div</span>
+<span class="formula-line">f = 1/T.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>A wave is 3 vertical divisions peak-to-peak at 2 V/div: Vpp = 6 V. A cycle takes 4 divisions at 100 μs/div: T = 400 μs = 0.0004 s, f = 2500 Hz.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> Match probe attenuation and channel settings. A 10× probe with the channel incorrectly set to 1× makes voltage read ten times too small.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="27">
+<legend>28. Peak-to-valley height 5 divisions at 200 mV/div: Vpp?</legend>
+<label>
+<input type="radio" name="q27" value="0">A. 0.04 V</label>
+<label>
+<input type="radio" name="q27" value="1">B. 1 V</label>
+<label>
+<input type="radio" name="q27" value="2">C. 5 V</label>
+<label>
+<input type="radio" name="q27" value="3">D. 1000 V</label>
+<button type="button" data-check="27">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 1 V</strong> 5×200 mV = 1000 mV = 1 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="28">
+<legend>29. A cycle spans 4 divisions at 0.5 ms/div. Frequency?</legend>
+<label>
+<input type="radio" name="q28" value="0">A. 2 Hz</label>
+<label>
+<input type="radio" name="q28" value="1">B. 2000 Hz</label>
+<label>
+<input type="radio" name="q28" value="2">C. 500 Hz</label>
+<label>
+<input type="radio" name="q28" value="3">D. 0.5 Hz</label>
+<button type="button" data-check="28">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 500 Hz</strong> T=2 ms=0.002 s; f=1/0.002=500 Hz.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="29">
+<legend>30. A zero-offset sine goes from a peak to its next valley in 1 ms. Full period?</legend>
+<label>
+<input type="radio" name="q29" value="0">A. 0.5 ms</label>
+<label>
+<input type="radio" name="q29" value="1">B. 1 ms</label>
+<label>
+<input type="radio" name="q29" value="2">C. 4 ms</label>
+<label>
+<input type="radio" name="q29" value="3">D. 2 ms</label>
+<button type="button" data-check="29">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>D. 2 ms</strong> Peak to next valley is half a cycle, so a full cycle takes 2 ms.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-11">
+<p class="tag">Lesson 11</p>
+<h2>Trigger: a repeatable starting condition</h2>
+<p>Imagine photographing a jumper every time they pass the same height while moving upward. The pictures line up even though the jumper keeps moving. Triggering similarly aligns repeated scope records; it does not stop the signal.</p>
+<div class="formula">
+<span class="formula-line">Edge triggering needs a level AND a direction</span>
+<span class="formula-line">Rising: crosses upward</span>
+<span class="formula-line">Falling: crosses downward</span>
+<span class="formula-line">Negative voltage can still be rising.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>Level +1 V, rising edge: 0→2 V qualifies. 2→0 V does not. −5→−1 V is rising because voltage increases. Several levels inside the signal range can work; there is no single magic trigger frequency.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> If a −2 to +2 V wave is asked to cross +3 V, no valid edge occurs. Auto mode may still refresh and drift; Normal mode waits and may retain an old trace.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="30">
+<legend>31. Rising trigger at 2 V. Which segment qualifies?</legend>
+<label>
+<input type="radio" name="q30" value="0">A. 4→1 V</label>
+<label>
+<input type="radio" name="q30" value="1">B. 0→1 V</label>
+<label>
+<input type="radio" name="q30" value="2">C. 1→3 V</label>
+<label>
+<input type="radio" name="q30" value="3">D. 3→5 V</label>
+<button type="button" data-check="30">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 1→3 V</strong> 1→3 V crosses 2 V upward. Other choices have wrong direction or never cross the level.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="31">
+<legend>32. Falling trigger at −1 V. Which segment qualifies?</legend>
+<label>
+<input type="radio" name="q31" value="0">A. −3→0 V</label>
+<label>
+<input type="radio" name="q31" value="1">B. 0→−2 V</label>
+<label>
+<input type="radio" name="q31" value="2">C. 3→1 V</label>
+<label>
+<input type="radio" name="q31" value="3">D. −2→−4 V</label>
+<button type="button" data-check="31">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 0→−2 V</strong> 0→−2 V crosses −1 V downward.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="32">
+<legend>33. Signal ranges −2 to +2 V. Rising trigger at +3 V. Result?</legend>
+<label>
+<input type="radio" name="q32" value="0">A. Valid trigger at every peak</label>
+<label>
+<input type="radio" name="q32" value="1">B. Frequency doubles</label>
+<label>
+<input type="radio" name="q32" value="2">C. Signal becomes DC</label>
+<label>
+<input type="radio" name="q32" value="3">D. No crossing meets this condition</label>
+<button type="button" data-check="32">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>D. No crossing meets this condition</strong> The signal never reaches +3 V, so it cannot cross that level.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-12">
+<p class="tag">Lesson 12</p>
+<h2>Peak, offset and RMS</h2>
+<p>Peak-to-peak is the entire height from minimum to maximum. Amplitude is height from the centerline for a symmetric wave. RMS is the DC voltage that would produce the same average heating in the same resistor. Negative voltage still produces heat.</p>
+<div class="formula">
+<span class="formula-line">Vpp = Vmax−Vmin; offset = (Vmax+Vmin)/2; amplitude A = Vpp/2 for symmetric waves</span>
+<span class="formula-line">Zero-offset sine: Vrms=A/√2</span>
+<span class="formula-line">Symmetric ±A square: Vrms=A</span>
+<span class="formula-line">Zero-offset triangle: Vrms=A/√3.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>For 8 Vpp with zero offset, A=4 V: sine RMS=2.83 V, square RMS=4 V, triangle RMS=2.31 V. A square spends nearly all its time at its maximum magnitude.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> Do not apply the sine formula to every waveform. A wave centered at +3 V with amplitude 2 V has a maximum of +5 V, not +2 V.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="33">
+<legend>34. Zero-offset sine: Vpp=10 V. RMS (two decimals)?</legend>
+<label>
+<input type="radio" name="q33" value="0">A. 5.00 V</label>
+<label>
+<input type="radio" name="q33" value="1">B. 3.54 V</label>
+<label>
+<input type="radio" name="q33" value="2">C. 7.07 V</label>
+<label>
+<input type="radio" name="q33" value="3">D. 10.00 V</label>
+<button type="button" data-check="33">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 3.54 V</strong> A=10/2=5 V; Vrms=5/√2≈3.54 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="34">
+<legend>35. Square alternates +5 V and −5 V, each for 50% of the period. Total RMS?</legend>
+<label>
+<input type="radio" name="q34" value="0">A. 0 V</label>
+<label>
+<input type="radio" name="q34" value="1">B. 2.5 V</label>
+<label>
+<input type="radio" name="q34" value="2">C. 10 V</label>
+<label>
+<input type="radio" name="q34" value="3">D. 5 V</label>
+<button type="button" data-check="34">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>D. 5 V</strong> Both levels square to 25 V², so RMS=√25=5 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="35">
+<legend>36. Symmetric sine: maximum +5 V, minimum +1 V. Vpp and offset?</legend>
+<label>
+<input type="radio" name="q35" value="0">A. 4 Vpp, +3 V</label>
+<label>
+<input type="radio" name="q35" value="1">B. 6 Vpp, +2 V</label>
+<label>
+<input type="radio" name="q35" value="2">C. 2 Vpp, +4 V</label>
+<label>
+<input type="radio" name="q35" value="3">D. 5 Vpp, 0 V</label>
+<button type="button" data-check="35">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>A. 4 Vpp, +3 V</strong> Vpp=5−1=4 V; centerline=(5+1)/2=3 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-13">
+<p class="tag">Lesson 13</p>
+<h2>Rectangular pulses and DC offset</h2>
+<p>Duty cycle is the fraction of each period spent high. A 25% duty cycle means high for one quarter of each cycle. Total RMS includes both the DC and changing parts; an AC-only meter reading may exclude DC.</p>
+<div class="formula">
+<span class="formula-line">D = thigh/T</span>
+<span class="formula-line">Total RMS = √[D VH² + (1−D)VL²]</span>
+<span class="formula-line">If VL=0: RMS=|VH|√D</span>
+<span class="formula-line">Average = D VH+(1−D)VL</span>
+<span class="formula-line">Offset sine: total RMS=√(VDC²+A²/2).</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>A 0-to-5 V pulse high for 25%: RMS=5√0.25=2.5 V, but average=5×0.25=1.25 V. These are different measurements.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> For a 0-to-6 V 50% pulse, total RMS is 4.24 V, not Vpp/2. State the two levels and duty cycle.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="36">
+<legend>37. 0-to-4 V pulse, 50% high. Total RMS (two decimals)?</legend>
+<label>
+<input type="radio" name="q36" value="0">A. 2.00 V</label>
+<label>
+<input type="radio" name="q36" value="1">B. 4.00 V</label>
+<label>
+<input type="radio" name="q36" value="2">C. 2.83 V</label>
+<label>
+<input type="radio" name="q36" value="3">D. 0 V</label>
+<button type="button" data-check="36">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 2.83 V</strong> RMS=√(0.5×16)=√8≈2.83 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="37">
+<legend>38. 0-to-8 V pulse, 25% high. Total RMS?</legend>
+<label>
+<input type="radio" name="q37" value="0">A. 2 V</label>
+<label>
+<input type="radio" name="q37" value="1">B. 4 V</label>
+<label>
+<input type="radio" name="q37" value="2">C. 8 V</label>
+<label>
+<input type="radio" name="q37" value="3">D. 16 V</label>
+<button type="button" data-check="37">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 4 V</strong> 8√0.25=8×0.5=4 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="38">
+<legend>39. Sine with DC offset +3 V and amplitude 4 V: total RMS (two decimals)?</legend>
+<label>
+<input type="radio" name="q38" value="0">A. 2.83 V</label>
+<label>
+<input type="radio" name="q38" value="1">B. 3.00 V</label>
+<label>
+<input type="radio" name="q38" value="2">C. 5.00 V</label>
+<label>
+<input type="radio" name="q38" value="3">D. 4.12 V</label>
+<button type="button" data-check="38">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>D. 4.12 V</strong> Total RMS=√(3²+4²/2)=√17≈4.12 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-14">
+<p class="tag">Lesson 14</p>
+<h2>Function generator: the internal 50 Ω</h2>
+<p>Model the generator as an ideal voltage source followed by a series resistance, often 50 Ω. If its display assumes an external 50 Ω load, it reports the voltage that load would receive. A high-impedance scope changes the divider.</p>
+<div class="formula">
+<span class="formula-line">Vload = Vsource RL/(Rs+RL)</span>
+<span class="formula-line">With Rs=50 Ω and a 50 Ω display assumption, Vsource=2×displayed value</span>
+<span class="formula-line">High-Z RL gives Vload≈Vsource.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>Display 1 Vpp with load setting 50 Ω: internal source is 2 Vpp. External 50 Ω receives 1 Vpp. A 1 MΩ scope receives nearly 2 Vpp because little voltage drops inside.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> High-Z display setting usually changes the reported amplitude assumption, not the physical internal 50 Ω. Compare like units: Vpp to Vpp. Check the actual instrument settings.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="39">
+<legend>40. 50 Ω source, display assumes 50 Ω load, setting 2 Vpp. A 1 MΩ scope reads approximately…</legend>
+<label>
+<input type="radio" name="q39" value="0">A. 1 Vpp</label>
+<label>
+<input type="radio" name="q39" value="1">B. 2 Vpp</label>
+<label>
+<input type="radio" name="q39" value="2">C. 4 Vpp</label>
+<label>
+<input type="radio" name="q39" value="3">D. 0 Vpp</label>
+<button type="button" data-check="39">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 4 Vpp</strong> Internal source is 4 Vpp; a 1 MΩ input receives nearly all of it.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="40">
+<legend>41. Same generator, setting 1 Vrms assuming 50 Ω. Actual external load 100 Ω. RMS (two decimals)?</legend>
+<label>
+<input type="radio" name="q40" value="0">A. 0.67 V</label>
+<label>
+<input type="radio" name="q40" value="1">B. 1.33 V</label>
+<label>
+<input type="radio" name="q40" value="2">C. 2.00 V</label>
+<label>
+<input type="radio" name="q40" value="3">D. 1.00 V</label>
+<button type="button" data-check="40">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 1.33 V</strong> Internal source=2 Vrms; load=2×100/(50+100)=1.33 Vrms.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="41">
+<legend>42. Why can a scope read nearly twice the displayed generator voltage?</legend>
+<label>
+<input type="radio" name="q41" value="0">A. Scope creates extra energy</label>
+<label>
+<input type="radio" name="q41" value="1">B. Frequency doubles voltage</label>
+<label>
+<input type="radio" name="q41" value="2">C. Internal resistor disappears</label>
+<label>
+<input type="radio" name="q41" value="3">D. Actual load differs from display assumption</label>
+<button type="button" data-check="41">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>D. Actual load differs from display assumption</strong> A high-impedance load draws little current, so little voltage drops across the internal 50 Ω.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-15">
+<p class="tag">Lesson 15</p>
+<h2>Capacitor charge, current and steady DC</h2>
+<p>Think of a capacitor as a water tank: charge is stored water, voltage is water level, and current is flow. A larger tank needs more water for the same level rise. This is an analogy: an ideal capacitor stores energy in its electric field; charge carriers do not cross its dielectric.</p>
+<div class="formula">
+<span class="formula-line">q = CV</span>
+<span class="formula-line">i = C dV/dt; for a constant voltage slope, i = C ΔV/Δt</span>
+<span class="formula-line">Positive current is defined entering the positive-voltage terminal.</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>10 μF rises by 2 V in 1 ms: i=(10×10⁻⁶)×2/0.001=0.020 A=20 mA. Once voltage is constant, dV/dt=0 and ideal capacitor current is zero.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> Use voltage CHANGE, not final voltage. With finite current, capacitor voltage cannot jump instantaneously. A real capacitor may have leakage.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="42">
+<legend>43. Ideal capacitor is settled at 5 V DC. Current?</legend>
+<label>
+<input type="radio" name="q42" value="0">A. 5 A</label>
+<label>
+<input type="radio" name="q42" value="1">B. Need C first</label>
+<label>
+<input type="radio" name="q42" value="2">C. 0 A</label>
+<label>
+<input type="radio" name="q42" value="3">D. Always increasing</label>
+<button type="button" data-check="42">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 0 A</strong> Constant voltage means dV/dt=0, so ideal current is zero.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="43">
+<legend>44. 5 μF rises uniformly from 1 V to 3 V in 1 ms. Current entering its positive terminal?</legend>
+<label>
+<input type="radio" name="q43" value="0">A. 15 mA</label>
+<label>
+<input type="radio" name="q43" value="1">B. 10 mA</label>
+<label>
+<input type="radio" name="q43" value="2">C. −10 mA</label>
+<label>
+<input type="radio" name="q43" value="3">D. 5 mA</label>
+<button type="button" data-check="43">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 10 mA</strong> ΔV=2 V; i=5×10⁻⁶×2/0.001=0.010 A=10 mA.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="44">
+<legend>45. 2 μF at 3 V stores charge of…</legend>
+<label>
+<input type="radio" name="q44" value="0">A. 1.5 μC</label>
+<label>
+<input type="radio" name="q44" value="1">B. 6 C</label>
+<label>
+<input type="radio" name="q44" value="2">C. 0.667 μC</label>
+<label>
+<input type="radio" name="q44" value="3">D. 6 μC</label>
+<button type="button" data-check="44">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>D. 6 μC</strong> q=CV=2 μF×3 V=6 μC.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<section id="lesson-16">
+<p class="tag">Lesson 16</p>
+<h2>RC time constant and capacitor energy</h2>
+<p>Through a resistor, capacitor charging starts fast and then slows as the source-to-capacitor voltage difference shrinks. One time constant is a speed measure, not full charging time. Energy grows with voltage squared.</p>
+<div class="formula">
+<span class="formula-line">τ=RC</span>
+<span class="formula-line">VC(t)=Vf+(V0−Vf)e^(−t/τ)</span>
+<span class="formula-line">From zero at t=τ: VC≈0.632 Vf</span>
+<span class="formula-line">E=½CV²</span>
+<span class="formula-line">Same C: Enew/Eold=(Vnew/Vold)².</span>
+</div>
+<div class="example">
+<strong>Worked example</strong>
+<p>R=10 kΩ, C=100 nF gives τ=0.001 s=1 ms. Charging 0→5 V: at τ, VC≈3.16 V; 1.84 V is still missing. Same capacitor from 3→9 V: voltage ratio=3, energy ratio=9, not 12.</p>
+</div>
+<p class="mistake">
+<strong>Common mistake / check:</strong> The 63.2% rule applies to the change toward the final value. From 2→10 V, one τ gives 2+0.632×8≈7.06 V. After 5τ a simple RC step is about 99.3% complete.</p>
+<h3>Try it yourself</h3>
+<fieldset data-q="45">
+<legend>46. R=2 kΩ, C=10 μF. Time constant?</legend>
+<label>
+<input type="radio" name="q45" value="0">A. 2 ms</label>
+<label>
+<input type="radio" name="q45" value="1">B. 200 ms</label>
+<label>
+<input type="radio" name="q45" value="2">C. 20 ms</label>
+<label>
+<input type="radio" name="q45" value="3">D. 20 s</label>
+<button type="button" data-check="45">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>C. 20 ms</strong> τ=2000×10×10⁻⁶=0.020 s=20 ms.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="46">
+<legend>47. Charging from 0 toward 10 V through R. Voltage after one τ (two decimals)?</legend>
+<label>
+<input type="radio" name="q46" value="0">A. 10.00 V</label>
+<label>
+<input type="radio" name="q46" value="1">B. 6.32 V</label>
+<label>
+<input type="radio" name="q46" value="2">C. 3.68 V</label>
+<label>
+<input type="radio" name="q46" value="3">D. 5.00 V</label>
+<button type="button" data-check="46">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>B. 6.32 V</strong> VC=10(1−e⁻¹)≈6.32 V.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<fieldset data-q="47">
+<legend>48. Same capacitor changes from 2 V to 8 V. Stored energy becomes…</legend>
+<label>
+<input type="radio" name="q47" value="0">A. 4 times</label>
+<label>
+<input type="radio" name="q47" value="1">B. 8 times</label>
+<label>
+<input type="radio" name="q47" value="2">C. 12 times</label>
+<label>
+<input type="radio" name="q47" value="3">D. 16 times</label>
+<button type="button" data-check="47">Check answer</button>
+<details>
+<summary>Show worked answer</summary>
+<p>
+<strong>D. 16 times</strong> Voltage ratio=8/2=4; energy ratio=4²=16.</p>
+</details>
+<p class="feedback" aria-live="polite">
+</p>
+</fieldset>
+<a href="#top" class="back">Back to top ↑</a>
+</section>
+<p id="empty-review" role="status" hidden>No mistakes to review yet. Check a few answers in All lessons first.</p>
+<section id="formula-sheet">
+<h2>Quick formula check</h2>
+<div class="table">
+<table>
+<tr>
+<th>Question</th>
+<th>Use</th>
+</tr>
+<tr>
+<td>Current / resistor heating</td>
+<td>I=V/R; P=VI=I²R=V²/R</td>
+</tr>
+<tr>
+<td>Period / frequency</td>
+<td>T=horizontal divisions×s/div; f=1/T</td>
+</tr>
+<tr>
+<td>Zero-offset wave RMS</td>
+<td>Sine: Vpp/(2√2); symmetric square: Vpp/2; triangle: Vpp/(2√3)</td>
+</tr>
+<tr>
+<td>Two-level total RMS</td>
+<td>√[D VH²+(1−D)VL²]</td>
+</tr>
+<tr>
+<td>Capacitor current / energy</td>
+<td>i=C dV/dt; E=½CV²</td>
+</tr>
+<tr>
+<td>RC charging</td>
+<td>τ=RC; from zero, one τ → 63.2% of final voltage</td>
+</tr>
+</table>
+</div>
+<p>
+<strong>Bench reminder:</strong> a conventional earth-referenced scope ground clip is tied to protective earth. Connecting it to a live node can short that node to earth; confirm instrument grounding before connecting.</p>
+</section>
+<footer>Use the existing lab guides for the full lab procedures and additional filter/op-amp material. All lesson text and practice questions on this page are in English.</footer>
+</main>
+<script>
+const answers=[{"correct":1,"work":"500 × 10⁻⁶ s = 0.0005 s."},{"correct":2,"work":"I = 6/3 = 2 A."},{"correct":1,"work":"G = 1/100 = 0.01 S."},{"correct":2,"work":"I = 5/1000 = 0.005 A = 5 mA."},{"correct":1,"work":"P = 10 × 0.002 = 0.020 W = 20 mW."},{"correct":1,"work":"P = V²/R, so the ratio is 2² = 4."},{"correct":1,"work":"R = (2×3)/(2+3) kΩ = 1.2 kΩ, below either resistor."},{"correct":2,"work":"Parallel branches have the same voltage because both endpoints are shared."},{"correct":3,"work":"2 kΩ parallel 2 kΩ = 1 kΩ; then add 1 kΩ to get 2 kΩ."},{"correct":1,"work":"8 = 3 + I, so I = 5 mA."},{"correct":2,"work":"12 − 5 − V = 0, giving V = 7 V."},{"correct":0,"work":"The minus sign reverses the reference direction: 2 mA flows left."},{"correct":2,"work":"Equal resistors divide the supply equally: 10/2 = 5 V."},{"correct":1,"work":"Vout = 12×8/(4+8) = 8 V."},{"correct":3,"work":"Bottom equivalent = 6∥6 = 3 kΩ; Vout = 9×3/(3+3) = 4.5 V."},{"correct":2,"work":"I₂Ω = 9×4/(2+4) = 6 A; the 4 Ω branch carries 3 A."},{"correct":1,"work":"Branch currents are 6 A, 3 A, 2 A; sum = 11 A."},{"correct":3,"work":"I = V/R: halving resistance doubles current."},{"correct":1,"work":"V = √(0.25×100) = 5 V."},{"correct":2,"work":"The 300 Ω limit is √(0.5/300) A. Multiply by 450 Ω: 18.37 V."},{"correct":1,"work":"R ≥ V²/P = 144/0.25 = 576 Ω."},{"correct":2,"work":"An ideal open has no conducting path, so I = 0 even when voltage is nonzero."},{"correct":1,"work":"Separate voltage-sense leads draw almost no current, largely excluding current-lead voltage drops."},{"correct":0,"work":"5% of 1000 Ω is 50 Ω, so the allowed range is 950 to 1050 Ω."},{"correct":1,"work":"At 6 V the demand is 3 A, above limit; CC gives 1 A and V=1×2=2 V."},{"correct":1,"work":"Demand is 6/12=0.5 A below limit, so CV holds 6 V."},{"correct":2,"work":"The limit caps current; a higher-resistance load can draw much less."},{"correct":1,"work":"5×200 mV = 1000 mV = 1 V."},{"correct":2,"work":"T=2 ms=0.002 s; f=1/0.002=500 Hz."},{"correct":3,"work":"Peak to next valley is half a cycle, so a full cycle takes 2 ms."},{"correct":2,"work":"1→3 V crosses 2 V upward. Other choices have wrong direction or never cross the level."},{"correct":1,"work":"0→−2 V crosses −1 V downward."},{"correct":3,"work":"The signal never reaches +3 V, so it cannot cross that level."},{"correct":1,"work":"A=10/2=5 V; Vrms=5/√2≈3.54 V."},{"correct":3,"work":"Both levels square to 25 V², so RMS=√25=5 V."},{"correct":0,"work":"Vpp=5−1=4 V; centerline=(5+1)/2=3 V."},{"correct":2,"work":"RMS=√(0.5×16)=√8≈2.83 V."},{"correct":1,"work":"8√0.25=8×0.5=4 V."},{"correct":3,"work":"Total RMS=√(3²+4²/2)=√17≈4.12 V."},{"correct":2,"work":"Internal source is 4 Vpp; a 1 MΩ input receives nearly all of it."},{"correct":1,"work":"Internal source=2 Vrms; load=2×100/(50+100)=1.33 Vrms."},{"correct":3,"work":"A high-impedance load draws little current, so little voltage drops across the internal 50 Ω."},{"correct":2,"work":"Constant voltage means dV/dt=0, so ideal current is zero."},{"correct":1,"work":"ΔV=2 V; i=5×10⁻⁶×2/0.001=0.010 A=10 mA."},{"correct":3,"work":"q=CV=2 μF×3 V=6 μC."},{"correct":2,"work":"τ=2000×10×10⁻⁶=0.020 s=20 ms."},{"correct":1,"work":"VC=10(1−e⁻¹)≈6.32 V."},{"correct":3,"work":"Voltage ratio=8/2=4; energy ratio=4²=16."}];
+let mode='all';let progress={};try{const p=JSON.parse(localStorage.getItem('ese123-foundations-v1')||'{}');if(p&&typeof p==='object'&&!Array.isArray(p))progress=p;}catch(e){}
+function score(){const ids=Object.keys(progress).filter(k=>answers[k]&&Number.isInteger(progress[k])&&progress[k]>=0&&progress[k]<4);const n=ids.filter(k=>progress[k]===answers[k].correct).length;document.getElementById('score').textContent=n+' / '+answers.length+' correct · '+ids.length+' attempted';}
+function check(id,restore=false){const box=document.querySelector('[data-q="'+id+'"]');const selected=box.querySelector('input:checked');const feedback=box.querySelector('.feedback');if(!selected){feedback.textContent='Choose an answer first.';return;}const value=Number(selected.value);progress[id]=value;const ok=value===answers[id].correct;box.classList.toggle('correct',ok);box.classList.toggle('incorrect',!ok);feedback.textContent=(ok?'Correct. ':'Review this one. ')+answers[id].work;if(!restore){try{localStorage.setItem('ese123-foundations-v1',JSON.stringify(progress));}catch(e){}}score();updateCompletion();}
+document.querySelectorAll('[data-check]').forEach(b=>b.addEventListener('click',()=>check(Number(b.dataset.check))));
+Object.keys(progress).forEach(id=>{const input=document.querySelector('input[name="q'+id+'"][value="'+progress[id]+'"]');if(input){input.checked=true;check(Number(id),true);}});
+document.getElementById('reset').onclick=()=>{progress={};mode='all';try{localStorage.removeItem('ese123-foundations-v1');}catch(e){}document.querySelectorAll('input').forEach(x=>x.checked=false);document.querySelectorAll('fieldset').forEach(x=>x.classList.remove('correct','incorrect'));document.querySelectorAll('.feedback').forEach(x=>x.textContent='');document.querySelectorAll('details').forEach(x=>x.open=false);score();updateCompletion();applyView();};document.body.id='top';score();updateCompletion();applyView();
+
+
+function updateCompletion(){document.getElementById('completion').value=Object.keys(progress).filter(k=>answers[k]&&Number.isInteger(progress[k])&&progress[k]>=0&&progress[k]<4).length;}
+function applyView(){
+ let wrong=0;
+ document.querySelectorAll('section[id^="lesson-"]').forEach(section=>{
+  let count=0;
+  section.querySelectorAll('fieldset').forEach(box=>{const id=box.dataset.q;const isWrong=Number.isInteger(progress[id])&&progress[id]!==answers[id].correct;box.hidden=mode==='wrong'&&!isWrong;if(isWrong)count++;});
+  section.hidden=mode==='formulas'||(mode==='wrong'&&!count);wrong+=count;
+ });
+ document.getElementById('formula-sheet').hidden=mode==='wrong';
+ document.getElementById('empty-review').hidden=mode!=='wrong'||wrong>0;
+ document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
+}
+document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;applyView();}));
+document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>{mode='all';applyView();}));
+window.addEventListener('beforeprint',()=>{document.querySelectorAll('details').forEach(d=>{d.dataset.printOpen=d.open;d.open=true;});});
+window.addEventListener('afterprint',()=>{document.querySelectorAll('details').forEach(d=>d.open=d.dataset.printOpen==='true');});
+</script>
+</body>
+</html>
